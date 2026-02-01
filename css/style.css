@@ -89,10 +89,11 @@ p {
 /* link */
 a {
   text-decoration: none;
-  color:var(--color-secondary)
+  color:var(--color-secondary);
+  transition: transform 0.2s;
 }
 a:hover {
-  font-weight: var(--fontweight-extrabold);
+  transform: scale(0.9);
 }
 
 
@@ -114,8 +115,8 @@ button:hover {
   font-weight: var(--fontweight-bold);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
-  gap: var(--padding-navmenu);                 /* space between items */
-  padding-left: var(--padding);                /* remove default padding */
+  gap: var(--padding);                 /* space between items */
+  padding: var(--padding);                /* remove default padding */
   margin: 0;                 /* remove default margin */
   justify-content: flex-start; /* align items to the start */
 }
