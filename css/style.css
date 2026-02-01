@@ -162,8 +162,8 @@ a:hover {
 
 .button-row {
   display: flex;
+  justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;             /* optional */
 }
 
 /* container */
