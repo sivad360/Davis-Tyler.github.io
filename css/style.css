@@ -5,6 +5,7 @@
   --color-tertiary: #222;
 
   /* Spacings */
+  --padding: 2rem;
   --padding-base: 1.25rem;
   --padding-navmenu: 2rem;
 
@@ -112,7 +113,7 @@ button:hover {
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
   gap: var(--padding-navmenu);                 /* space between items */
-  padding: 0;                /* remove default padding */
+  padding-left: var(--padding);                /* remove default padding */
   margin: 0;                 /* remove default margin */
   justify-content: flex-start; /* align items to the start */
 }
