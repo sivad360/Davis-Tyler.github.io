@@ -157,6 +157,13 @@ a:hover {
   gap: 1rem;
 }
 
+.button-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start; /* left-aligned */
+  flex-wrap: wrap;             /* optional */
+}
+
 /* container */
 .container {
   max-width: 800px;
