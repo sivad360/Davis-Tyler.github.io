@@ -175,12 +175,13 @@ a:hover {
   text-align: center;         /* centers content inside the card */
   margin: var(--margin-size-medium);
   background-color: var(--color-primary); /* optional card background */
+  border-radius: 8px;         /* rounded corners */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px yellow;
 }
 
 .button-row {
