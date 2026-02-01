@@ -5,11 +5,11 @@
   --color-tertiary: #222;
 
   /* Spacings */
-  --padding-base: 20px;
-  --margin-base: 1rem;
+  --padding-base: 1.25rem;
+
 
   /* Fonts */
-  --font-helvetica: body "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --font-size-small: 1.25rem;
 
@@ -44,22 +44,20 @@
 
 /* body */
 body {
-  background: magenta;
+  background: var(--color-primary);
 
-  color: blue;
+  color: var(--color-secondary);
   
-  font-family: Helvetica;
+  font-family: var(--font-helvetica);
 
   line-height: 1.6;
 
-  font-size: 2rem;
+  font-size: var(--font-size-large);
 }
 
 
 /* Headers */
 h1{
-  color: yellow; 
-
   font-size: var(--font-size-large);
 
   margin-bottom: var(--margin-size-large);
@@ -88,8 +86,6 @@ p {
 
 /* link */
 a {
-  color: #0077cc;
-
   text-decoration: none;
 }
 a:hover {
@@ -102,13 +98,12 @@ button {
   font-family: inherit;
   padding: 0.5rem 1rem;
   border: none;
-  /* background-color: var(--color-primary);
-  color: var(--color-secondary); */
   border-radius: 4px;
   cursor: pointer;
 }
 button:hover {
-  background-color: #005fa3;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .nav-menu {
@@ -121,7 +116,6 @@ button:hover {
 
 .nav-menu li a {
   text-decoration: none;
-  color: var(--color-tertiary); /* dark color from your variables */
   font-weight: 400;
   font-size: var(--font-size-medium);
   transition: font-weight 0.2s;
@@ -135,7 +129,7 @@ button:hover {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--padding-base);
 }
 
 
