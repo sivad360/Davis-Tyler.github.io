@@ -26,6 +26,7 @@
   /* Hovers */
 
   --fontweight-bold: 700;
+  --fontweight-extrabold: 900
 
 
 }
@@ -89,7 +90,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  font-weight: var(--fontweight-bold);
+  font-weight: var(--fontweight-extrabold);
 }
 
 
@@ -116,7 +117,7 @@ button:hover {
 
 .nav-menu li a {
   text-decoration: none;
-  font-weight: 400;
+  font-weight: var(--fontweight-bold);
   font-size: var(--font-size-medium);
   transition: font-weight 0.2s;
 }
