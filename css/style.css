@@ -112,6 +112,18 @@ button:hover {
   color: var(--color-primary);
 }
 
+/* link
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-secondary);
+  transition: transform 0.2s;
+}
+a:hover {
+  transform: scale(0.5);
+} */
+
+
 .nav-menu {
   font-size: var(--font-size-medium);
   font-weight: var(--fontweight-bold);
@@ -121,6 +133,17 @@ button:hover {
   padding: var(--padding-medium);                /* remove default padding */
   margin: 0;                 /* remove default margin */
   justify-content: flex-start; /* align items to the start */
+}
+
+/* link */
+.nav-menu a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-secondary);
+  transition: transform 0.2s;
+}
+.nav-menu a:hover {
+  transform: scale(0.8);
 }
 
 
