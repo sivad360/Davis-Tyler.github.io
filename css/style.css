@@ -108,6 +108,7 @@ button {
   background-color: var(--color-secondary);
   color: var(--color-primary);
   font-size: var(--font-size-medium);
+  font-weight: var(--fontweight-bold);
   font-family: inherit;
   padding: 0.5rem 1rem;
   border: none;
