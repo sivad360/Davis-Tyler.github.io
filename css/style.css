@@ -87,7 +87,7 @@ h3 {
 
 /* paragraphs */
 p {
-  margin-bottom: var(--margin-size-large);
+  margin-bottom: var(--margin-size-small);
 }
 
 
