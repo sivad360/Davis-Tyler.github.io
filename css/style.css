@@ -146,12 +146,11 @@ a:hover {
   transform: scale(0.8);
 }
 
-
 /* container */
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: var(--padding);
+  padding: 2rem;
 }
 
 
