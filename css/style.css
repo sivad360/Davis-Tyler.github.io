@@ -108,6 +108,7 @@ button:hover {
 }
 
 .nav-menu {
+  color: var(--color-primary);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
   gap: 20px;                 /* space between items */
@@ -124,7 +125,7 @@ button:hover {
 }
 
 .nav-menu li a:hover {
-  font-weight: var(--fontweight-bold); /* bold on hover */
+  font-weight: var(--fontweight-extrabold); /* bold on hover */
 }
 
 /* container */
