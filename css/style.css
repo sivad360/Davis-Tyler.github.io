@@ -141,7 +141,7 @@ img {
   max-width: 100%;
 
   height: auto;
-
+  
   display: block;
 }
 
@@ -149,7 +149,6 @@ img {
 /* lists */
 ul, ol {
   margin-left: 1.5rem;
-  
   margin-bottom: 1rem;
 }
 
