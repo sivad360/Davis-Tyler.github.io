@@ -89,6 +89,7 @@ p {
 
 /* link */
 a {
+  display: inline-block;
   text-decoration: none;
   color: var(--color-secondary);
   transition: transform 0.2s;
@@ -127,7 +128,7 @@ button:hover {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: var(--padding-base);
+  padding: var(--padding);
 }
 
 
