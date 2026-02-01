@@ -5,9 +5,12 @@
   --color-tertiary: #222;
 
   /* Spacings */
-  --padding: 2rem;
-  --padding-base: 1.25rem;
-  --padding-navmenu: 2rem;
+  --padding-small : 1rem;
+
+  --padding-medium: 2rem;
+
+  --padding-large: 3rem;
+
 
   /* Fonts */
   --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -27,8 +30,6 @@
   /* Hovers */
 
   --fontweight-bold: 700;
-  --fontweight-extrabold: 900
-
 
 }
 
@@ -89,7 +90,7 @@ p {
 /* link */
 a {
   text-decoration: none;
-  color:var(--color-secondary);
+  color: var(--color-secondary);
   transition: transform 0.2s;
 }
 a:hover {
@@ -115,22 +116,12 @@ button:hover {
   font-weight: var(--fontweight-bold);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
-  gap: var(--padding);                 /* space between items */
-  padding: var(--padding);                /* remove default padding */
+  gap: var(--padding-medium);                 /* space between items */
+  padding: var(--padding-medium);                /* remove default padding */
   margin: 0;                 /* remove default margin */
   justify-content: flex-start; /* align items to the start */
 }
 
-/* .nav-menu li a {
-  text-decoration: none;
-  font-weight: var(--fontweight-bold);
-  font-size: var(--font-size-medium);
-  transition: font-weight 0.2s;
-}
-
-.nav-menu li a:hover {
-  font-weight: var(--fontweight-extrabold); /* bold on hover */
-} */
 
 /* container */
 .container {
