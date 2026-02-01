@@ -165,11 +165,11 @@ a:hover {
 /* hero */
 .hero {
   display: flex;
-  flex-direction: row;
   gap: 1rem;
 }
 
 .card {
+  display: flex;
   padding: var(--padding-medium);
   max-width: 300px;           /* optional card width */
   margin: var(--margin-size-medium);
