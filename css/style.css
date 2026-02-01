@@ -186,6 +186,12 @@ a:hover {
   gap: 1rem;
 }
 
+.littletainer {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 /* container */
 .container {
   max-width: 800px;
