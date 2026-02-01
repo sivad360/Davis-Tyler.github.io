@@ -154,6 +154,14 @@ a:hover {
   transform: scale(0.8);
 }
 
+.footer {
+  text-align: center;
+  padding: var(--padding-medium);
+  background-color: var(--color-tertiary);
+  color: var(--color-secondary);
+  margin-top: var(--margin-size-large);
+}
+
 /* hero */
 .hero {
   display: flex;
@@ -162,8 +170,20 @@ a:hover {
 }
 
 .card {
-  
+  padding: var(--padding-medium);
+  max-width: 300px;           /* optional card width */
+  text-align: center;         /* centers content inside the card */
+  margin: var(--margin-size-medium);
+  background-color: var(--color-primary); /* optional card background */
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
 
 .button-row {
   display: flex;
