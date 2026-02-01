@@ -21,11 +21,15 @@
 
   --font-size-large: 2rem;
 
+  --font-size-xl: 4rem;
+
   --margin-size-small: 0.5rem;
 
   --margin-size-medium: 0.75rem;
 
   --margin-size-large: 1rem;
+
+  --margin-size-xl: 2rem;
 
   /* Hovers */
 
@@ -61,9 +65,9 @@ body {
 
 /* Headers */
 h1{
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-xl);
 
-  margin-bottom: var(--margin-size-large);
+  margin-bottom: var(--margin-size-xl);
 }
 
 
