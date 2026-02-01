@@ -161,6 +161,10 @@ a:hover {
   gap: 1rem;
 }
 
+.card {
+  
+}
+
 .button-row {
   display: flex;
   justify-content: center;
