@@ -6,7 +6,7 @@
 
   /* Spacings */
   --padding-base: 1.25rem;
-
+  --padding-navmenu: 2rem;
 
   /* Fonts */
   --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -112,7 +112,7 @@ button:hover {
   color: var(--color-secondary);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
-  gap: 20px;                 /* space between items */
+  gap: var(--padding-navmenu);                 /* space between items */
   padding: 0;                /* remove default padding */
   margin: 0;                 /* remove default margin */
   justify-content: flex-start; /* align items to the start */
