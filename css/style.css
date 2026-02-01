@@ -172,16 +172,12 @@ a:hover {
 .card {
   padding: var(--padding-medium);
   max-width: 300px;           /* optional card width */
-  text-align: center;         /* centers content inside the card */
   margin: var(--margin-size-medium);
-  background-color: var(--color-primary); /* optional card background */
-  border-radius: 8px;         /* rounded corners */
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: font-size 0.2s;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px yellow;
+.card:hover h1 {
+  font-size: var(--font-size-medium);
 }
 
 .button-row {
