@@ -110,6 +110,8 @@ button:hover {
 }
 
 .nav-menu {
+  font-size: var(--font-size-medium);
+  font-weight: var(--fontweight-bold);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
   gap: var(--padding-navmenu);                 /* space between items */
