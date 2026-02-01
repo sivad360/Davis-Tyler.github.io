@@ -156,6 +156,7 @@ a:hover {
 /* hero */
 .hero {
   display: flex;
+  margin: 0 auto;
   flex-direction: row;
   gap: 1rem;
 }
