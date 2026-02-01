@@ -109,7 +109,6 @@ button:hover {
 }
 
 .nav-menu {
-  color: var(--color-secondary);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
   gap: var(--padding-navmenu);                 /* space between items */
