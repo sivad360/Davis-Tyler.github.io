@@ -88,6 +88,7 @@ p {
 /* link */
 a {
   text-decoration: none;
+  color:var(--color-secondary)
 }
 a:hover {
   font-weight: var(--fontweight-extrabold);
@@ -108,7 +109,7 @@ button:hover {
 }
 
 .nav-menu {
-  color: var(--color-primary);
+  color: var(--color-secondary);
   list-style: none;          /* remove bullets */
   display: flex;             /* horizontal layout */
   gap: 20px;                 /* space between items */
