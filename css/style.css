@@ -111,6 +111,25 @@ button:hover {
   background-color: #005fa3;
 }
 
+.nav-menu {
+  list-style: none;          /* remove bullets */
+  display: flex;             /* horizontal layout */
+  gap: 20px;                 /* space between items */
+  padding: 0;                /* remove default padding */
+  margin: 0;                 /* remove default margin */
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: var(--color-tertiary); /* dark color from your variables */
+  font-weight: 400;
+  font-size: var(--font-size-medium);
+  transition: font-weight 0.2s;
+}
+
+.nav-menu li a:hover {
+  font-weight: var(--fontweight-bold); /* bold on hover */
+}
 
 /* container */
 .container {
