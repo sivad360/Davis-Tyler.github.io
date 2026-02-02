@@ -187,7 +187,7 @@ a:hover {
 }
 
 .littletainer {
-  max-width: 30rem;
+  max-width: 60rem;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -220,7 +220,7 @@ a:hover {
 
 /* images */
 img {
- max-width: 20rem;
+ max-width: 40rem;
  height: auto;
 }
 
