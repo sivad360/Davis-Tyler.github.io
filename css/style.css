@@ -168,7 +168,13 @@ a:hover {
   gap: 1rem;
 }
 
-.card {
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.herocard {
   display: flex;
   padding: var(--padding-medium);
   max-width: 300px;           /* optional card width */
