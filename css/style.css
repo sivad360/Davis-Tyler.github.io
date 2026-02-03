@@ -170,8 +170,18 @@ a:hover {
 
 .card-grid {
   display: flex;
+ 
+  justify-content: center;
+
   flex-wrap: wrap;
+
   gap: 1.5rem;
+}
+
+.card {
+  flex: 1 1 250px;
+  padding: 1rem;
+  max-width: 350px;
 }
 
 .herocard {
