@@ -157,8 +157,6 @@ a:hover {
 .footer {
   text-align: center;
   padding: var(--padding-medium);
-  background-color: var(--color-tertiary);
-  color: var(--color-secondary);
   margin-top: var(--margin-size-large);
 }
 
