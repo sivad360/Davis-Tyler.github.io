@@ -173,21 +173,6 @@
             overflow: hidden;
         }
         
-        .card::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--yellow);
-            transition: width 0.5s var(--timing);
-        }
-        
-        .card:hover::before {
-            width: 100%;
-        }
-        
         .card:hover {
             transform: translateY(-8px);
         }
