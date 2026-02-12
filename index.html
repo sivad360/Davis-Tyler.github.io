@@ -206,29 +206,27 @@
             transition: all 0.5s var(--timing);
             position: relative;
             overflow: hidden;
-            aspect-ratio: 3/4;
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
+            background: transparent;
+        }
+
+        .photo-thumb {
+            width: 100%;
+            height: 220px;
             background-size: cover;
             background-position: center;
         }
-        
-        .photo-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, var(--magenta) 100%);
-            z-index: 1;
-        }
-        
-        .photo-card:hover {
+
+        .photo-card:hover .photo-thumb {
             transform: scale(1.02);
+            transition: transform 0.5s var(--timing);
         }
-        
+
         .photo-info {
             position: relative;
             z-index: 2;
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             width: 100%;
         }
         
@@ -451,21 +449,24 @@
             <div class="section-label">PHOTOGRAPHY</div>
             
             <div class="cards-grid">
-                <div class="photo-card" style="background-image: url('./images/photography/4149_007.jpg');">
+                <div class="photo-card">
+                    <div class="photo-thumb" style="background-image: url('./images/photography/4149_007.jpg');"></div>
                     <div class="photo-info">
                         <div class="photo-title">Portrait Series</div>
                         <div class="photo-meta">24 IMAGES</div>
                     </div>
                 </div>
                 
-                <div class="photo-card" style="background-image: url('./images/photography/4149_011%20copy.jpg');">
+                <div class="photo-card">
+                    <div class="photo-thumb" style="background-image: url('./images/photography/4149_011%20copy.jpg');"></div>
                     <div class="photo-info">
                         <div class="photo-title">Urban Landscapes</div>
                         <div class="photo-meta">32 IMAGES</div>
                     </div>
                 </div>
                 
-                <div class="photo-card" style="background-image: url('./images/photography/6215-017%20copy.jpg');">
+                <div class="photo-card">
+                    <div class="photo-thumb" style="background-image: url('./images/photography/6215-017%20copy.jpg');"></div>
                     <div class="photo-info">
                         <div class="photo-title">Film Photography</div>
                         <div class="photo-meta">18 IMAGES</div>
