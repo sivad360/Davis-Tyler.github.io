@@ -1,97 +1,511 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title> Home </title>
-
-<link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Peek Next Section</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #E4007C;
+            --yellow: #FFF700;
+            --timing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--magenta);
+            color: var(--yellow);
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        ::selection {
+            background: var(--yellow);
+            color: var(--magenta);
+        }
+        
+        .container {
+            min-height: 100vh;
+            padding: 6vw;
+        }
+        
+        /* PEEK NEXT SECTION: Header takes exactly 100vh minus peek amount */
+        header {
+            min-height: calc(100vh - 15vw);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 1.2s var(--timing);
+        }
+        
+        section {
+            margin-bottom: 12vw;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) forwards;
+        }
+        
+        section:nth-child(2) { animation-delay: 0.5s; }
+        section:nth-child(3) { animation-delay: 0.6s; }
+        section:nth-child(4) { animation-delay: 0.7s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(3rem, 15vw, 12rem);
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) 0.3s forwards;
+        }
+        
+        .section-label {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            opacity: 0.6;
+            margin-bottom: 3vw;
+        }
+        
+        .hero-card {
+            border: 4px solid var(--yellow);
+            padding: 6vw;
+            margin-bottom: 4vw;
+            cursor: pointer;
+            transition: all 0.6s var(--timing);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--yellow);
+            transition: left 0.6s var(--timing);
+            z-index: 0;
+        }
+        
+        .hero-card:hover::before {
+            left: 0;
+        }
+        
+        .hero-card:hover {
+            color: var(--magenta);
+        }
+        
+        .hero-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-meta {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+            opacity: 0.8;
+        }
+        
+        .hero-description {
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            line-height: 1.6;
+            max-width: 60ch;
+            opacity: 0.9;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3vw;
+        }
+        
+        .card {
+            border: 3px solid var(--yellow);
+            padding: 4vw 3vw;
+            cursor: pointer;
+            transition: all 0.5s var(--timing);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--yellow);
+            transition: width 0.5s var(--timing);
+        }
+        
+        .card:hover::before {
+            width: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .card-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-meta {
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .card-description {
+            font-size: clamp(0.7rem, 1.3vw, 0.8rem);
+            line-height: 1.5;
+            opacity: 0.85;
+        }
+        
+        .photo-card {
+            border: 3px solid var(--yellow);
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.5s var(--timing);
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, var(--magenta) 100%);
+            z-index: 1;
+        }
+        
+        .photo-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .photo-info {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            width: 100%;
+        }
+        
+        .photo-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .photo-meta {
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            opacity: 0.8;
+        }
+        
+        .resources-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2vw;
+        }
+        
+        .resource-item {
+            border-top: 2px solid var(--yellow);
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 2rem;
+            transition: all 0.4s var(--timing);
+        }
+        
+        .resource-item:hover {
+            padding-left: 2rem;
+            background: rgba(255, 247, 0, 0.05);
+        }
+        
+        .resource-title {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 400;
+        }
+        
+        .resource-type {
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+            white-space: nowrap;
+            opacity: 0.7;
+        }
+        
+        footer {
+            border-top: 2px solid var(--yellow);
+            padding-top: 3rem;
+            margin-top: 10vw;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) 1s forwards;
+        }
+        
+        .footer-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem 3rem;
+            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+        }
+        
+        .footer-nav a {
+            color: var(--yellow);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s var(--timing);
+        }
+        
+        .footer-nav a:hover {
+            transform: translateX(10px);
+        }
+        
+        .footer-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--yellow);
+            transition: width 0.4s var(--timing);
+        }
+        
+        .footer-nav a:hover::after {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                min-height: auto;
+                margin-bottom: 10vw;
+            }
+            
+            .container {
+                padding: 6vw 4vw;
+            }
+            
+            .hero-card {
+                padding: 8vw 6vw;
+            }
+            
+            .card {
+                padding: 8vw 6vw;
+            }
+            
+            .hero-meta,
+            .card-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .resource-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<header>
-  <nav>
-    <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="project.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-
-</header>
-
-<section class="hero">
-
     <div class="container">
-
-
-        <h1>Hello!</h1>
-
-        <p>Welcome, my name is Davis. This is a collection of things
-            I have made, places I have been and much more. I hope you find what
-            you are looking for. 
-        </p>
-
-        <button> What I Do</button>
-
-    </div>
-
-    <div class="container">
-        <img src="images/good portrait.jpg" alt="portrait">
-    </div>
-
-
-</section>
-
-<section class="container">
-
-    <h1> Featured Projects </h1>
-
-    <p> My best work. </p>
-
-    <div class="herocard">
-
-        <div class="littletainer">
-            <img src="images/sewing/project.png" alt="Project Image">
+        <header>
+            <h1>Your<br>Name</h1>
+            <p class="subtitle">Designer / Developer / Creative</p>
+        </header>
         
-        </div>
-
-        <div class="littletainer">
-            <h2> Article Title </h2>
-            <p> This is a short description of the article. It gives a brief overview of the content to entice readers to click and read more. </p>
-            <a href="project.html">Read More</a>
-        </div>
+        <section>
+            <div class="section-label">PROJECTS</div>
+            
+            <div class="hero-card">
+                <h2 class="hero-title">Project Alpha</h2>
+                <div class="hero-meta">
+                    <span>BRANDING · IDENTITY</span>
+                    <span>CLIENT: ACME CORP</span>
+                </div>
+                <p class="hero-description">
+                    A comprehensive brand identity system for a tech startup redefining sustainable manufacturing. 
+                    Created visual language, motion guidelines, and digital touchpoints.
+                </p>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Digital Experience</h3>
+                    <div class="card-meta">
+                        <span>WEB DESIGN</span>
+                        <span>REACT · GSAP</span>
+                    </div>
+                    <p class="card-description">
+                        Interactive platform for art collective. Built with React, GSAP animations.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Brand Identity</h3>
+                    <div class="card-meta">
+                        <span>VISUAL SYSTEM</span>
+                        <span>PRINT · RETAIL</span>
+                    </div>
+                    <p class="card-description">
+                        Full rebrand for boutique coffee roaster. Logo, packaging, retail experience.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Experimental</h3>
+                    <div class="card-meta">
+                        <span>CREATIVE CODE</span>
+                        <span>P5.JS · SHADERS</span>
+                    </div>
+                    <p class="card-description">
+                        Generative art series exploring typography and motion.
+                    </p>
+                </div>
+            </div>
+        </section>
         
+        <section>
+            <div class="section-label">TRIPS</div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Patagonia</h3>
+                    <div class="card-meta">
+                        <span>TORRES DEL PAINE</span>
+                        <span>3 WEEKS</span>
+                    </div>
+                    <p class="card-description">
+                        Backpacking the O Circuit. Gear breakdown, route notes, and photos from Chilean Patagonia.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Iceland Road Trip</h3>
+                    <div class="card-meta">
+                        <span>RING ROAD</span>
+                        <span>10 DAYS</span>
+                    </div>
+                    <p class="card-description">
+                        Complete loop around Iceland. Waterfalls, black sand beaches, and northern lights.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="section-label">PHOTOGRAPHY</div>
+            
+            <div class="cards-grid">
+                <div class="photo-card">
+                    <div class="photo-info">
+                        <div class="photo-title">Portrait Series</div>
+                        <div class="photo-meta">24 IMAGES</div>
+                    </div>
+                </div>
+                
+                <div class="photo-card">
+                    <div class="photo-info">
+                        <div class="photo-title">Urban Landscapes</div>
+                        <div class="photo-meta">32 IMAGES</div>
+                    </div>
+                </div>
+                
+                <div class="photo-card">
+                    <div class="photo-info">
+                        <div class="photo-title">Film Photography</div>
+                        <div class="photo-meta">18 IMAGES</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="section-label">RESOURCES</div>
+            
+            <div class="resources-list">
+                <div class="resource-item">
+                    <span class="resource-title">Design Tools I Use</span>
+                    <span class="resource-type">TOOLKIT</span>
+                </div>
+                <div class="resource-item">
+                    <span class="resource-title">Travel Packing List</span>
+                    <span class="resource-type">GUIDE</span>
+                </div>
+                <div class="resource-item">
+                    <span class="resource-title">React Libraries Worth Knowing</span>
+                    <span class="resource-type">COLLECTION</span>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-nav">
+                <a href="#projects">Projects</a>
+                <a href="#trips">Trips</a>
+                <a href="#photography">Photography</a>
+                <a href="#resources">Resources</a>
+                <a href="#about">About</a>
+                <a href="mailto:your@email.com">Email</a>
+                <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
+                <a href="https://github.com/yourhandle" target="_blank">GitHub</a>
+            </div>
+        </footer>
     </div>
-
-    <div class="button-row">
-        <button>Home</button>
-        <button>About</button>
-        <button>Projects</button>
-    </div>  
-
-</section>
-
-<section class="card-grid">
-  <article class="card">Card 1</article>
-  <article class="card">Card 2</article>
-  <article class="card">Card 3</article>
-  <article class="card">Card 4</article>
-</section>
-
-<footer class="footer">
-  
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="project.html">Projects</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-
-    <p>© 2026 Davis Tyler</p>
-
-</footer>
-
 </body>
 </html>
