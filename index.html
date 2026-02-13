@@ -164,17 +164,46 @@
             gap: 3vw;
         }
         
+        /* NEW CARD STYLES WITH IMAGE */
         .card {
             border: 3px solid var(--yellow);
-            padding: 4vw 3vw;
             cursor: pointer;
             transition: all 0.5s var(--timing);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: var(--magenta);
         }
         
         .card:hover {
             transform: translateY(-8px);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 247, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--timing);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 4vw 3vw;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .card-title {
@@ -199,6 +228,7 @@
             opacity: 0.85;
         }
         
+        /* PHOTO CARDS - KEEP EXISTING STYLE */
         .photo-card {
             border: 3px solid var(--yellow);
             padding: 0;
@@ -209,6 +239,19 @@
             aspect-ratio: 3/4;
             display: flex;
             align-items: flex-end;
+        }
+
+        .photo-card-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--timing);
+        }
+
+        .photo-card:hover .photo-card-image {
+            transform: scale(1.05);
         }
 
         .photo-card::before {
@@ -250,28 +293,29 @@
         
         .resource-item {
             border-top: 2px solid var(--yellow);
-            padding: 2rem 0;
+            padding: 2vw 0;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             gap: 2rem;
+            cursor: pointer;
             transition: all 0.4s var(--timing);
         }
         
         .resource-item:hover {
             padding-left: 2rem;
-            background: rgba(255, 247, 0, 0.05);
         }
         
-        .resource-title {
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
-            font-weight: 400;
+        .resource-name {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 600;
         }
         
         .resource-type {
-            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
-            white-space: nowrap;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
             opacity: 0.7;
+            text-align: right;
         }
         
         footer {
@@ -294,8 +338,6 @@
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 2rem 3rem;
         }
-
-        
 
         .footer-nav a {
             color: var(--yellow);
@@ -338,7 +380,7 @@
                 padding: 8vw 6vw;
             }
             
-            .card {
+            .card-content {
                 padding: 8vw 6vw;
             }
             
@@ -351,6 +393,10 @@
             .resource-item {
                 flex-direction: column;
                 gap: 0.5rem;
+            }
+
+            .card-image-wrapper {
+                aspect-ratio: 16/9;
             }
         }
     </style>
@@ -378,37 +424,52 @@
             </div>
             
             <div class="cards-grid">
-                <div class="card" style="background-image: url('./images/projects/LOAM_FULL KIT_CHAMOIS_NARROW.png'); background-size: cover; background-position: center;">
-                    <h3 class="card-title">Digital Experience</h3>
-                    <div class="card-meta">
-                        <span>WEB DESIGN</span>
-                        <span>REACT · GSAP</span>
+                <div class="card">
+                    <div class="card-image-wrapper">
+                        <img src="./images/projects/LOAM_FULL KIT_CHAMOIS_NARROW.png" alt="Digital Experience" class="card-image">
                     </div>
-                    <p class="card-description">
-                        Interactive platform for art collective. Built with React, GSAP animations.
-                    </p>
+                    <div class="card-content">
+                        <h3 class="card-title">Digital Experience</h3>
+                        <div class="card-meta">
+                            <span>WEB DESIGN</span>
+                            <span>REACT · GSAP</span>
+                        </div>
+                        <p class="card-description">
+                            Interactive platform for art collective. Built with React, GSAP animations.
+                        </p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h3 class="card-title">Brand Identity</h3>
-                    <div class="card-meta">
-                        <span>VISUAL SYSTEM</span>
-                        <span>PRINT · RETAIL</span>
+                    <div class="card-image-wrapper">
+                        <img src="./images/projects/LOAM_FrameBag_Product2K.png" alt="Brand Identity" class="card-image">
                     </div>
-                    <p class="card-description">
-                        Full rebrand for boutique coffee roaster. Logo, packaging, retail experience.
-                    </p>
+                    <div class="card-content">
+                        <h3 class="card-title">Brand Identity</h3>
+                        <div class="card-meta">
+                            <span>VISUAL SYSTEM</span>
+                            <span>PRINT · RETAIL</span>
+                        </div>
+                        <p class="card-description">
+                            Full rebrand for boutique coffee roaster. Logo, packaging, retail experience.
+                        </p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h3 class="card-title">Experimental</h3>
-                    <div class="card-meta">
-                        <span>CREATIVE CODE</span>
-                        <span>P5.JS · SHADERS</span>
+                    <div class="card-image-wrapper">
+                        <img src="./images/projects/PaulKalifatidi_LOAMShopVisit-7658.jpg" alt="Experimental" class="card-image">
                     </div>
-                    <p class="card-description">
-                        Generative art series exploring typography and motion.
-                    </p>
+                    <div class="card-content">
+                        <h3 class="card-title">Experimental</h3>
+                        <div class="card-meta">
+                            <span>CREATIVE CODE</span>
+                            <span>P5.JS · SHADERS</span>
+                        </div>
+                        <p class="card-description">
+                            Generative art series exploring typography and motion.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -418,25 +479,35 @@
             
             <div class="cards-grid">
                 <div class="card">
-                    <h3 class="card-title">Patagonia</h3>
-                    <div class="card-meta">
-                        <span>TORRES DEL PAINE</span>
-                        <span>3 WEEKS</span>
+                    <div class="card-image-wrapper">
+                        <img src="./images/projects/LOAM-7.jpg" alt="Patagonia" class="card-image">
                     </div>
-                    <p class="card-description">
-                        Backpacking the O Circuit. Gear breakdown, route notes, and photos from Chilean Patagonia.
-                    </p>
+                    <div class="card-content">
+                        <h3 class="card-title">Patagonia</h3>
+                        <div class="card-meta">
+                            <span>TORRES DEL PAINE</span>
+                            <span>3 WEEKS</span>
+                        </div>
+                        <p class="card-description">
+                            Backpacking the O Circuit. Gear breakdown, route notes, and photos from Chilean Patagonia.
+                        </p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h3 class="card-title">Iceland Road Trip</h3>
-                    <div class="card-meta">
-                        <span>RING ROAD</span>
-                        <span>10 DAYS</span>
+                    <div class="card-image-wrapper">
+                        <img src="./images/projects/LOAM_BarBag_Product2K.png" alt="Iceland Road Trip" class="card-image">
                     </div>
-                    <p class="card-description">
-                        Complete loop around Iceland. Waterfalls, black sand beaches, and northern lights.
-                    </p>
+                    <div class="card-content">
+                        <h3 class="card-title">Iceland Road Trip</h3>
+                        <div class="card-meta">
+                            <span>RING ROAD</span>
+                            <span>10 DAYS</span>
+                        </div>
+                        <p class="card-description">
+                            Complete loop around Iceland. Waterfalls, black sand beaches, and northern lights.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -445,21 +516,24 @@
             <div class="section-label">PHOTOGRAPHY</div>
             
             <div class="cards-grid">
-                <div class="photo-card" style="background-image: url('./images/photography/4149_007.jpg'); background-size: cover; background-position: center;">
+                <div class="photo-card">
+                    <img src="./images/photography/4149_007.jpg" alt="Portrait Series" class="photo-card-image">
                     <div class="photo-info">
                         <div class="photo-title">Portrait Series</div>
                         <div class="photo-meta">24 IMAGES</div>
                     </div>
                 </div>
                 
-                <div class="photo-card" style="background-image: url('./images/photography/4149_011%20copy.jpg'); background-size: cover; background-position: center;">
+                <div class="photo-card">
+                    <img src="./images/photography/4149_011%20copy.jpg" alt="Urban Landscapes" class="photo-card-image">
                     <div class="photo-info">
                         <div class="photo-title">Urban Landscapes</div>
                         <div class="photo-meta">32 IMAGES</div>
                     </div>
                 </div>
                 
-                <div class="photo-card" style="background-image: url('./images/photography/6215-017%20copy.jpg'); background-size: cover; background-position: center;">
+                <div class="photo-card">
+                    <img src="./images/photography/6215-017%20copy.jpg" alt="Film Photography" class="photo-card-image">
                     <div class="photo-info">
                         <div class="photo-title">Film Photography</div>
                         <div class="photo-meta">18 IMAGES</div>
@@ -473,33 +547,39 @@
             
             <div class="cards-grid">
                 <div class="card">
-                    <h3 class="card-title">Design Tools</h3>
-                    <div class="card-meta">
-                        <span>TOOLKIT</span>
+                    <div class="card-content">
+                        <h3 class="card-title">Design Tools</h3>
+                        <div class="card-meta">
+                            <span>TOOLKIT</span>
+                        </div>
+                        <p class="card-description">
+                            Essential software and applications for design and creative work.
+                        </p>
                     </div>
-                    <p class="card-description">
-                        Essential software and applications for design and creative work.
-                    </p>
                 </div>
                 
                 <div class="card">
-                    <h3 class="card-title">Travel Guides</h3>
-                    <div class="card-meta">
-                        <span>PLANNING</span>
+                    <div class="card-content">
+                        <h3 class="card-title">Travel Guides</h3>
+                        <div class="card-meta">
+                            <span>PLANNING</span>
+                        </div>
+                        <p class="card-description">
+                            Curated travel resources, packing lists, and destination guides.
+                        </p>
                     </div>
-                    <p class="card-description">
-                        Curated travel resources, packing lists, and destination guides.
-                    </p>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">Development</h3>
-                    <div class="card-meta">
-                        <span>LIBRARIES</span>
+                    <div class="card-content">
+                        <h3 class="card-title">Development</h3>
+                        <div class="card-meta">
+                            <span>LIBRARIES</span>
+                        </div>
+                        <p class="card-description">
+                            Useful frameworks, libraries, and tools for modern development.
+                        </p>
                     </div>
-                    <p class="card-description">
-                        Useful frameworks, libraries, and tools for modern development.
-                    </p>
                 </div>
             </div>
         </section>
