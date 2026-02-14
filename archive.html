@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive - Davis Tyler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #E4007C;
+            --yellow: #FFF700;
+            --timing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--magenta);
+            color: var(--yellow);
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        ::selection {
+            background: var(--yellow);
+            color: var(--magenta);
+        }
+        
+        .container {
+            min-height: 100vh;
+            padding: 6vw;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6vw;
+            padding-bottom: 3vw;
+            border-bottom: 2px solid var(--yellow);
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) forwards;
+        }
+        
+        .nav-logo {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--yellow);
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-back {
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            text-decoration: none;
+            color: var(--yellow);
+            transition: transform 0.3s var(--timing);
+            display: inline-block;
+        }
+        
+        .nav-back:hover {
+            transform: translateX(-5px);
+        }
+        
+        /* Header */
+        header {
+            margin-bottom: 6vw;
+            opacity: 0;
+            animation: slideIn 1s var(--timing) 0.2s forwards;
+        }
+        
+        h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            opacity: 0.7;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: 2vw;
+            margin-bottom: 6vw;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) 0.4s forwards;
+        }
+        
+        .filter-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--yellow);
+            color: var(--yellow);
+            cursor: pointer;
+            transition: all 0.4s var(--timing);
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--yellow);
+            transition: left 0.4s var(--timing);
+            z-index: 0;
+        }
+        
+        .filter-btn:hover::before,
+        .filter-btn.active::before {
+            left: 0;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--magenta);
+        }
+        
+        .filter-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Archive Grid */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 3vw;
+            margin-bottom: 8vw;
+        }
+        
+        .archive-item {
+            border: 3px solid var(--yellow);
+            text-decoration: none;
+            color: var(--yellow);
+            cursor: pointer;
+            transition: all 0.5s var(--timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: var(--magenta);
+            opacity: 0;
+            animation: fadeIn 0.6s var(--timing) forwards;
+        }
+        
+        .archive-item:nth-child(1) { animation-delay: 0.5s; }
+        .archive-item:nth-child(2) { animation-delay: 0.55s; }
+        .archive-item:nth-child(3) { animation-delay: 0.6s; }
+        .archive-item:nth-child(4) { animation-delay: 0.65s; }
+        .archive-item:nth-child(5) { animation-delay: 0.7s; }
+        .archive-item:nth-child(6) { animation-delay: 0.75s; }
+        .archive-item:nth-child(7) { animation-delay: 0.8s; }
+        .archive-item:nth-child(8) { animation-delay: 0.85s; }
+        .archive-item:nth-child(9) { animation-delay: 0.9s; }
+        
+        .archive-item:hover {
+            transform: translateY(-8px);
+        }
+        
+        .archive-item.hidden {
+            display: none;
+        }
+        
+        .item-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 247, 0, 0.05);
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--timing);
+        }
+        
+        .archive-item:hover .item-image img {
+            transform: scale(1.05);
+        }
+        
+        .item-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            opacity: 0.3;
+            letter-spacing: 0.2em;
+        }
+        
+        .item-content {
+            padding: 4vw 3vw;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-category {
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            opacity: 0.6;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+        
+        .item-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        
+        .item-meta {
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            opacity: 0.5;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .item-description {
+            font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+        
+        /* Stats */
+        .archive-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4vw;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            opacity: 0.6;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) 0.3s forwards;
+        }
+        
+        .stat {
+            letter-spacing: 0.1em;
+        }
+        
+        .stat strong {
+            color: var(--yellow);
+            font-weight: 400;
+        }
+        
+        /* Footer */
+        footer {
+            padding-top: 6vw;
+            border-top: 2px solid var(--yellow);
+            opacity: 0.5;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 6vw 4vw;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+            
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-bar {
+                gap: 1rem;
+            }
+            
+            .filter-btn {
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .item-content {
+                padding: 8vw 6vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="nav-logo">DT</a>
+            <a href="index.html" class="nav-back">← Back to Portfolio</a>
+        </nav>
+        
+        <header>
+            <h1>Archive</h1>
+            <p class="subtitle">All projects, trips, photography & resources</p>
+        </header>
+        
+        <div class="archive-stats">
+            <span class="stat">SHOWING: <strong id="count-display">24</strong> ITEMS</span>
+            <span class="stat">UPDATED: <strong>FEB 2024</strong></span>
+        </div>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all"><span>ALL</span></button>
+            <button class="filter-btn" data-filter="projects"><span>PROJECTS</span></button>
+            <button class="filter-btn" data-filter="trips"><span>TRIPS</span></button>
+            <button class="filter-btn" data-filter="photography"><span>PHOTOGRAPHY</span></button>
+            <button class="filter-btn" data-filter="resources"><span>RESOURCES</span></button>
+        </div>
+        
+        <div class="archive-grid">
+            <!-- Projects -->
+            <a href="project.html" class="archive-item" data-category="projects">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PROJECTS</div>
+                    <h3 class="item-title">Sewin wit ma dam computer</h3>
+                    <div class="item-meta">
+                        <span>BRANDING · IDENTITY</span>
+                        <span>2024</span>
+                    </div>
+                    <p class="item-description">A documentation of my process implementing technology into my sewing workflow.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="projects">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PROJECTS</div>
+                    <h3 class="item-title">Digital Experience</h3>
+                    <div class="item-meta">
+                        <span>WEB DESIGN</span>
+                        <span>2024</span>
+                    </div>
+                    <p class="item-description">Interactive platform for art collective. Built with React, GSAP animations.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="projects">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PROJECTS</div>
+                    <h3 class="item-title">Brand Identity</h3>
+                    <div class="item-meta">
+                        <span>VISUAL SYSTEM</span>
+                        <span>2023</span>
+                    </div>
+                    <p class="item-description">Full rebrand for boutique coffee roaster. Logo, packaging, retail experience.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="projects">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PROJECTS</div>
+                    <h3 class="item-title">Experimental</h3>
+                    <div class="item-meta">
+                        <span>CREATIVE CODE</span>
+                        <span>2023</span>
+                    </div>
+                    <p class="item-description">Generative art series exploring typography and motion.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="projects">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PROJECTS</div>
+                    <h3 class="item-title">E-commerce Platform</h3>
+                    <div class="item-meta">
+                        <span>DEVELOPMENT</span>
+                        <span>2023</span>
+                    </div>
+                    <p class="item-description">Custom shopping experience for sustainable fashion brand.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="projects">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PROJECTS</div>
+                    <h3 class="item-title">Editorial Design</h3>
+                    <div class="item-meta">
+                        <span>PRINT</span>
+                        <span>2022</span>
+                    </div>
+                    <p class="item-description">Magazine layout and typography for quarterly culture publication.</p>
+                </div>
+            </a>
+            
+            <!-- Trips -->
+            <a href="#" class="archive-item" data-category="trips">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">TRIPS</div>
+                    <h3 class="item-title">Patagonia</h3>
+                    <div class="item-meta">
+                        <span>TORRES DEL PAINE</span>
+                        <span>3 WEEKS</span>
+                    </div>
+                    <p class="item-description">Backpacking the O Circuit. Gear breakdown, route notes, and photos from Chilean Patagonia.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="trips">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">TRIPS</div>
+                    <h3 class="item-title">Iceland Road Trip</h3>
+                    <div class="item-meta">
+                        <span>RING ROAD</span>
+                        <span>10 DAYS</span>
+                    </div>
+                    <p class="item-description">Complete loop around Iceland. Waterfalls, black sand beaches, and northern lights.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="trips">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">TRIPS</div>
+                    <h3 class="item-title">Japan Spring</h3>
+                    <div class="item-meta">
+                        <span>TOKYO · KYOTO</span>
+                        <span>2 WEEKS</span>
+                    </div>
+                    <p class="item-description">Cherry blossom season in Japan. Temple visits, street food, and urban exploration.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="trips">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">TRIPS</div>
+                    <h3 class="item-title">Scottish Highlands</h3>
+                    <div class="item-meta">
+                        <span>WEST HIGHLAND WAY</span>
+                        <span>7 DAYS</span>
+                    </div>
+                    <p class="item-description">Hiking through Scotland's most dramatic landscapes. Lochs, glens, and mountain passes.</p>
+                </div>
+            </a>
+            
+            <!-- Photography -->
+            <a href="#" class="archive-item" data-category="photography">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PHOTOGRAPHY</div>
+                    <h3 class="item-title">Portrait Series</h3>
+                    <div class="item-meta">
+                        <span>DIGITAL</span>
+                        <span>24 IMAGES</span>
+                    </div>
+                    <p class="item-description">Environmental portraits of creatives in their workspaces.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="photography">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PHOTOGRAPHY</div>
+                    <h3 class="item-title">Urban Landscapes</h3>
+                    <div class="item-meta">
+                        <span>DIGITAL</span>
+                        <span>32 IMAGES</span>
+                    </div>
+                    <p class="item-description">Architectural photography exploring geometry and light in city spaces.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="photography">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PHOTOGRAPHY</div>
+                    <h3 class="item-title">Film Photography</h3>
+                    <div class="item-meta">
+                        <span>35MM FILM</span>
+                        <span>18 IMAGES</span>
+                    </div>
+                    <p class="item-description">Shot on various film stocks. Street photography and candid moments.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="photography">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PHOTOGRAPHY</div>
+                    <h3 class="item-title">Nature & Wilderness</h3>
+                    <div class="item-meta">
+                        <span>DIGITAL</span>
+                        <span>40 IMAGES</span>
+                    </div>
+                    <p class="item-description">Landscape photography from hiking and camping trips across the Pacific Northwest.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="photography">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">PHOTOGRAPHY</div>
+                    <h3 class="item-title">Night Photography</h3>
+                    <div class="item-meta">
+                        <span>LONG EXPOSURE</span>
+                        <span>15 IMAGES</span>
+                    </div>
+                    <p class="item-description">Star trails, city lights, and nocturnal urban scenes.</p>
+                </div>
+            </a>
+            
+            <!-- Resources -->
+            <a href="#" class="archive-item" data-category="resources">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">RESOURCES</div>
+                    <h3 class="item-title">Design Tools</h3>
+                    <div class="item-meta">
+                        <span>TOOLKIT</span>
+                        <span>12 ITEMS</span>
+                    </div>
+                    <p class="item-description">Essential software and applications for design and creative work.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="resources">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">RESOURCES</div>
+                    <h3 class="item-title">Travel Guides</h3>
+                    <div class="item-meta">
+                        <span>PLANNING</span>
+                        <span>8 GUIDES</span>
+                    </div>
+                    <p class="item-description">Curated travel resources, packing lists, and destination guides.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="resources">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">RESOURCES</div>
+                    <h3 class="item-title">Development</h3>
+                    <div class="item-meta">
+                        <span>LIBRARIES</span>
+                        <span>20 ITEMS</span>
+                    </div>
+                    <p class="item-description">Useful frameworks, libraries, and tools for modern development.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="resources">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">RESOURCES</div>
+                    <h3 class="item-title">Photography Gear</h3>
+                    <div class="item-meta">
+                        <span>EQUIPMENT</span>
+                        <span>15 ITEMS</span>
+                    </div>
+                    <p class="item-description">Camera bodies, lenses, and accessories I use for different types of photography.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="resources">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">RESOURCES</div>
+                    <h3 class="item-title">Hiking Gear</h3>
+                    <div class="item-meta">
+                        <span>OUTDOOR</span>
+                        <span>25 ITEMS</span>
+                    </div>
+                    <p class="item-description">Tested gear recommendations for backpacking and multi-day hiking trips.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="archive-item" data-category="resources">
+                <div class="item-image">
+                    <div class="item-placeholder">IMAGE 800×600</div>
+                </div>
+                <div class="item-content">
+                    <div class="item-category">RESOURCES</div>
+                    <h3 class="item-title">Inspiration</h3>
+                    <div class="item-meta">
+                        <span>BOOKMARKS</span>
+                        <span>30+ LINKS</span>
+                    </div>
+                    <p class="item-description">Design inspiration sources, portfolios, and creative references I return to regularly.</p>
+                </div>
+            </a>
+        </div>
+        
+        <footer>
+            <p>© 2024 Davis Tyler · Seamstress / Designer / Creative</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const items = document.querySelectorAll('.archive-item');
+        const countDisplay = document.getElementById('count-display');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                let visibleCount = 0;
+                
+                // Filter items
+                items.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                
+                // Update count
+                countDisplay.textContent = visibleCount;
+            });
+        });
+    </script>
+</body>
+</html>
