@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Name - Davis Tyler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #E4007C;
+            --yellow: #FFF700;
+            --timing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--magenta);
+            color: var(--yellow);
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        ::selection {
+            background: var(--yellow);
+            color: var(--magenta);
+        }
+        
+        .container {
+            min-height: 100vh;
+            padding: 6vw;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8vw;
+            padding-bottom: 3vw;
+            border-bottom: 2px solid var(--yellow);
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) forwards;
+        }
+        
+        .nav-logo {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--yellow);
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-back {
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            text-decoration: none;
+            color: var(--yellow);
+            transition: transform 0.3s var(--timing);
+            display: inline-block;
+        }
+        
+        .nav-back:hover {
+            transform: translateX(-5px);
+        }
+        
+        /* Header */
+        header {
+            margin-bottom: 10vw;
+            opacity: 0;
+            animation: slideIn 1s var(--timing) 0.2s forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+            opacity: 0.7;
+            flex-wrap: wrap;
+        }
+        
+        .project-meta span {
+            letter-spacing: 0.1em;
+        }
+        
+        h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+        
+        .project-intro {
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            line-height: 1.7;
+            max-width: 65ch;
+            opacity: 0.9;
+        }
+        
+        /* Sections */
+        section {
+            margin-bottom: 12vw;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) forwards;
+        }
+        
+        section:nth-child(2) { animation-delay: 0.4s; }
+        section:nth-child(3) { animation-delay: 0.5s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.7s; }
+        section:nth-child(6) { animation-delay: 0.8s; }
+        
+        .section-label {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            opacity: 0.6;
+            margin-bottom: 3vw;
+        }
+        
+        h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        
+        p {
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 70ch;
+        }
+        
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            gap: 3vw;
+            margin-top: 4vw;
+        }
+        
+        .image-grid.two-col {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--yellow);
+            aspect-ratio: 16/10;
+            background: rgba(255, 247, 0, 0.05);
+            transition: transform 0.5s var(--timing);
+        }
+        
+        .image-wrapper:hover {
+            transform: scale(0.98);
+        }
+        
+        .image-wrapper.hero {
+            aspect-ratio: 21/9;
+            grid-column: 1 / -1;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            opacity: 0.3;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            letter-spacing: 0.2em;
+        }
+        
+        /* Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4vw;
+            margin-top: 3vw;
+        }
+        
+        .detail-item h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .detail-item ul {
+            list-style: none;
+        }
+        
+        .detail-item li {
+            font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+            line-height: 1.8;
+            opacity: 0.7;
+        }
+        
+        .detail-item li::before {
+            content: '→ ';
+            opacity: 0.5;
+        }
+        
+        /* Next Project */
+        .next-project {
+            border: 4px solid var(--yellow);
+            padding: 6vw;
+            cursor: pointer;
+            transition: all 0.6s var(--timing);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            color: var(--yellow);
+        }
+        
+        .next-project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--yellow);
+            transition: left 0.6s var(--timing);
+            z-index: 0;
+        }
+        
+        .next-project:hover::before {
+            left: 0;
+        }
+        
+        .next-project:hover {
+            color: var(--magenta);
+        }
+        
+        .next-project > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .next-label {
+            font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+        
+        .next-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Footer */
+        footer {
+            padding-top: 6vw;
+            border-top: 2px solid var(--yellow);
+            opacity: 0.5;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 6vw 4vw;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .next-project {
+                padding: 8vw 6vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="nav-logo">DT</a>
+            <a href="index.html" class="nav-back">← Back to Portfolio</a>
+        </nav>
+        
+        <header>
+            <div class="project-meta">
+                <span>DESIGN · DEVELOPMENT</span>
+                <span>CLIENT: LOREM IPSUM CO</span>
+                <span>2024</span>
+            </div>
+            <h1>Lorem Ipsum Dolor</h1>
+            <p class="project-intro">
+                Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </header>
+        
+        <section>
+            <div class="image-grid">
+                <div class="image-wrapper hero">
+                    <div class="image-placeholder">HERO IMAGE 2400×1200</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="section-label">OVERVIEW</div>
+            <h2>Duis aute irure dolor</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+                laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                mollit anim id est laborum.
+            </p>
+        </section>
+        
+        <section>
+            <div class="image-grid two-col">
+                <div class="image-wrapper">
+                    <div class="image-placeholder">IMAGE 1200×800</div>
+                </div>
+                <div class="image-wrapper">
+                    <div class="image-placeholder">IMAGE 1200×800</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="section-label">APPROACH</div>
+            <h2>Sed ut perspiciatis</h2>
+            <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                dicta sunt explicabo.
+            </p>
+            <p>
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur 
+                magni dolores eos qui ratione voluptatem sequi nesciunt.
+            </p>
+            
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h3>Tools & Technologies</h3>
+                    <ul>
+                        <li>Figma / Sketch</li>
+                        <li>React / Next.js</li>
+                        <li>GSAP Animation</li>
+                        <li>Three.js / WebGL</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Brand Guidelines</li>
+                        <li>Design System</li>
+                        <li>Web Application</li>
+                        <li>Documentation</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <h3>Timeline</h3>
+                    <ul>
+                        <li>Discovery: 2 weeks</li>
+                        <li>Design: 4 weeks</li>
+                        <li>Development: 8 weeks</li>
+                        <li>Launch: Q4 2024</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="image-grid">
+                <div class="image-wrapper hero">
+                    <div class="image-placeholder">FINAL IMAGE 2400×1200</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="section-label">RESULTS</div>
+            <h2>Neque porro quisquam</h2>
+            <p>
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum 
+                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non 
+                provident, similique sunt in culpa qui officia deserunt mollitia animi.
+            </p>
+            <p>
+                Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et 
+                voluptates repudiandae sint et molestiae non recusandae.
+            </p>
+        </section>
+        
+        <section>
+            <a href="#" class="next-project">
+                <div class="next-label">NEXT PROJECT</div>
+                <h2 class="next-title">Excepteur Sint Occaecat</h2>
+            </a>
+        </section>
+        
+        <footer>
+            <p>© 2024 Davis Tyler · Seamstress / Designer / Creative</p>
+        </footer>
+    </div>
+</body>
+</html>
