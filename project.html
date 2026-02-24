@@ -36,8 +36,6 @@
         .container {
             min-height: 100vh;
             padding: 6vw;
-            max-width: 1400px;
-            margin: 0 auto;
         }
         
         /* Navigation */
@@ -143,7 +141,7 @@
         
         .section-label {
             font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
             font-weight: 400;
             letter-spacing: 0.3em;
             opacity: 0.6;
@@ -207,6 +205,16 @@
             letter-spacing: 0.2em;
         }
         
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-wrapper.contain img {
+            object-fit: contain;
+        }
+
         /* Details Grid */
         .details-grid {
             display: grid;
@@ -296,6 +304,8 @@
             border-top: 2px solid var(--yellow);
             padding-top: 3rem;
             margin-top: 10vw;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) 1s forwards;
         }
 
         .footer-nav {
@@ -386,19 +396,19 @@
         
         <section>
             <div class="image-grid">
-                <div class="image-wrapper hero">
-                    <img src="images/projects/properfckinvestlad8212025 38 40.png" alt="Vest 38/40" style="width:100%;height:100%;object-fit:contain;">
+                <div class="image-wrapper hero contain">
+                    <img src="images/projects/properfckinvestlad8212025 38 40.png" alt="Vest 38/40">
                 </div>
             </div>
         </section>
         
         <section>
             <div class="image-grid two-col">
-                <div class="image-wrapper">
-                    <img src="images/projects/properfckinvestlad8212025 38 40_2.png" alt="Vest back 38/40" style="width:100%;height:100%;object-fit:contain;">
+                <div class="image-wrapper contain">
+                    <img src="images/projects/properfckinvestlad8212025 38 40_2.png" alt="Vest back 38/40">
                 </div>
-                <div class="image-wrapper">
-                    <img src="images/projects/properfckinvestlad8212025 38 40_1.png" alt="Vest front 38/40" style="width:100%;height:100%;object-fit:contain;">
+                <div class="image-wrapper contain">
+                    <img src="images/projects/properfckinvestlad8212025 38 40_1.png" alt="Vest front 38/40">
                 </div>
             </div>
         </section>
@@ -467,24 +477,24 @@
         <section>
             <div class="image-grid two-col">
                 <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6614.jpg" alt="LOAM Shop Visit" style="width:100%;height:100%;object-fit:cover;">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6614.jpg" alt="LOAM Shop Visit">
                 </div>
                 <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6617.jpg" alt="LOAM Shop Visit" style="width:100%;height:100%;object-fit:cover;">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6617.jpg" alt="LOAM Shop Visit">
                 </div>
                 <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6618.jpg" alt="LOAM Shop Visit" style="width:100%;height:100%;object-fit:cover;">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6618.jpg" alt="LOAM Shop Visit">
                 </div>
                 <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6622.jpg" alt="LOAM Shop Visit" style="width:100%;height:100%;object-fit:cover;">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6622.jpg" alt="LOAM Shop Visit">
                 </div>
             </div>
         </section>
 
         <section>
             <div class="image-grid">
-                <div class="image-wrapper hero">
-                    <img src="images/projects/Screenshot 2026-02-23 at 11.01.34 PM.png" alt="Vest pattern pieces" style="width:100%;height:100%;object-fit:contain;">
+                <div class="image-wrapper hero contain">
+                    <img src="images/projects/Screenshot 2026-02-23 at 11.01.34 PM.png" alt="Vest pattern pieces">
                 </div>
             </div>
         </section>
