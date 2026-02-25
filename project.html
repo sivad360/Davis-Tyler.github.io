@@ -589,18 +589,18 @@
             camera.position.set(0, 0, 3);
 
             // ── Lighting ──────────────────────────────────────────────
-            const ambient = new THREE.AmbientLight(0xfff700, 0.4);
+            const ambient = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambient);
 
             const key = new THREE.DirectionalLight(0xffffff, 1.2);
             key.position.set(2, 3, 4);
             scene.add(key);
 
-            const fill = new THREE.DirectionalLight(0xe4007c, 0.6);
+            const fill = new THREE.DirectionalLight(0xffffff, 0.4);
             fill.position.set(-3, -1, -2);
             scene.add(fill);
 
-            const rim = new THREE.DirectionalLight(0xfff700, 0.5);
+            const rim = new THREE.DirectionalLight(0xffffff, 0.3);
             rim.position.set(0, -3, -3);
             scene.add(rim);
 
@@ -619,7 +619,7 @@
 
             // ── Material ──────────────────────────────────────────────
             const material = new THREE.MeshStandardMaterial({
-                color:     0xfff700,
+                color:     0xcccccc,
                 metalness: 0.1,
                 roughness: 0.6,
             });
