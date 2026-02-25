@@ -683,7 +683,7 @@
         // --- Renderer ---
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor(0xE4007C);
+        renderer.setClearColor(0x111111);
         container.appendChild(renderer.domElement);
 
         // --- Scene & Camera ---
@@ -691,12 +691,12 @@
         const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
 
         // --- Lights ---
-        const ambient = new THREE.AmbientLight(0xFFF700, 0.4);
+        const ambient = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambient);
-        const dirA = new THREE.DirectionalLight(0xFFF700, 0.9);
+        const dirA = new THREE.DirectionalLight(0xffffff, 1.0);
         dirA.position.set(1, 2, 2);
         scene.add(dirA);
-        const dirB = new THREE.DirectionalLight(0xFFF700, 0.4);
+        const dirB = new THREE.DirectionalLight(0xffffff, 0.4);
         dirB.position.set(-2, -1, -1);
         scene.add(dirB);
 
@@ -763,9 +763,9 @@
 
                 // Solid mesh
                 const mat = new THREE.MeshPhongMaterial({
-                    color: 0xE4007C,
-                    emissive: 0x330020,
-                    specular: 0xFFF700,
+                    color: 0xcccccc,
+                    emissive: 0x111111,
+                    specular: 0xffffff,
                     shininess: 60,
                     side: THREE.DoubleSide,
                 });
@@ -774,9 +774,9 @@
 
                 // Wireframe overlay
                 const wireMat = new THREE.MeshBasicMaterial({
-                    color: 0xFFF700,
+                    color: 0xffffff,
                     wireframe: true,
-                    opacity: 0.18,
+                    opacity: 0.08,
                     transparent: true,
                 });
                 scene.add(new THREE.Mesh(geo, wireMat));
@@ -784,9 +784,9 @@
             .catch(() => {
                 // Fallback: show a placeholder box so the viewer isn't blank
                 const geo = new THREE.BoxGeometry(1, 1.4, 0.2);
-                const mat = new THREE.MeshPhongMaterial({ color: 0xE4007C, specular: 0xFFF700, shininess: 40 });
+                const mat = new THREE.MeshPhongMaterial({ color: 0xcccccc, specular: 0xffffff, shininess: 40 });
                 scene.add(new THREE.Mesh(geo, mat));
-                scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xFFF700, wireframe: true, opacity: 0.25, transparent: true })));
+                scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, opacity: 0.08, transparent: true })));
                 camera.position.set(0, 0, 3);
             });
 
