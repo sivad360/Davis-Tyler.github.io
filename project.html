@@ -681,9 +681,9 @@
         const container = document.getElementById('webgl-container');
 
         // --- Renderer ---
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor(0x111111);
+        renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
 
         // --- Scene & Camera ---
