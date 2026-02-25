@@ -700,12 +700,30 @@
         dirB.position.set(-2, -1, -1);
         scene.add(dirB);
 
-        // --- Minimal OBJ parser ---
+        // --- Parse MTL ---
+        function parseMTL(text) {
+            const materials = {};
+            let current = null;
+            for (const rawLine of text.split('\n')) {
+                const line = rawLine.trim();
+                if (line.startsWith('newmtl ')) {
+                    current = line.slice(7).trim();
+                    materials[current] = {};
+                } else if (current) {
+                    const parts = line.split(/\s+/);
+                    if (parts[0] === 'Kd') materials[current].Kd = [parseFloat(parts[1]), parseFloat(parts[2]), parseFloat(parts[3])];
+                    if (parts[0] === 'Ks') materials[current].Ks = [parseFloat(parts[1]), parseFloat(parts[2]), parseFloat(parts[3])];
+                    if (parts[0] === 'Ns') materials[current].Ns  = parseFloat(parts[1]);
+                }
+            }
+            return materials;
+        }
+
+        // --- Parse OBJ with per-material groups ---
         function parseOBJ(text) {
-            const positions = [];
-            const normals = [];
-            const posOut = [];
-            const normOut = [];
+            const positions = [], normals = [];
+            const groups = {};
+            let currentMat = '__default__';
 
             for (const rawLine of text.split('\n')) {
                 const line = rawLine.trim();
@@ -715,80 +733,77 @@
                 } else if (line.startsWith('vn ')) {
                     const [, x, y, z] = line.split(/\s+/);
                     normals.push(parseFloat(x), parseFloat(y), parseFloat(z));
+                } else if (line.startsWith('usemtl ')) {
+                    currentMat = line.slice(7).trim();
+                    if (!groups[currentMat]) groups[currentMat] = { posOut: [], normOut: [] };
                 } else if (line.startsWith('f ')) {
+                    if (!groups[currentMat]) groups[currentMat] = { posOut: [], normOut: [] };
                     const parts = line.slice(2).trim().split(/\s+/);
-                    // Fan-triangulate polygons
                     for (let i = 1; i < parts.length - 1; i++) {
                         [parts[0], parts[i], parts[i + 1]].forEach(part => {
                             const segs = part.split('/');
                             const vi = (parseInt(segs[0]) - 1) * 3;
-                            posOut.push(positions[vi], positions[vi+1], positions[vi+2]);
+                            groups[currentMat].posOut.push(positions[vi], positions[vi+1], positions[vi+2]);
                             if (segs[2]) {
                                 const ni = (parseInt(segs[2]) - 1) * 3;
-                                normOut.push(normals[ni], normals[ni+1], normals[ni+2]);
+                                groups[currentMat].normOut.push(normals[ni], normals[ni+1], normals[ni+2]);
                             }
                         });
                     }
                 }
             }
-
-            const geo = new THREE.BufferGeometry();
-            geo.setAttribute('position', new THREE.Float32BufferAttribute(posOut, 3));
-            if (normOut.length) {
-                geo.setAttribute('normal', new THREE.Float32BufferAttribute(normOut, 3));
-            } else {
-                geo.computeVertexNormals();
-            }
-            return geo;
+            return groups;
         }
 
-        // --- Load OBJ ---
-        fetch('./vest_test_render.obj')
-            .then(r => r.text())
-            .then(text => {
-                const geo = parseOBJ(text);
-                geo.computeBoundingBox();
-                const box = geo.boundingBox;
-                const center = new THREE.Vector3();
-                box.getCenter(center);
-                geo.translate(-center.x, -center.y, -center.z);
+        // --- Load MTL + OBJ ---
+        Promise.all([
+            fetch('./vest_test_render.mtl').then(r => r.text()),
+            fetch('./vest_test_render.obj').then(r => r.text())
+        ]).then(([mtlText, objText]) => {
+            const mtlMap = parseMTL(mtlText);
+            const groups = parseOBJ(objText);
 
-                const size = new THREE.Vector3();
-                box.getSize(size);
-                const maxDim = Math.max(size.x, size.y, size.z);
-                camera.position.set(0, 0, maxDim * 1.6);
-                camera.near = maxDim * 0.001;
-                camera.far = maxDim * 10;
-                camera.updateProjectionMatrix();
+            const group = new THREE.Group();
+            for (const [matName, { posOut, normOut }] of Object.entries(groups)) {
+                if (!posOut.length) continue;
+                const geo = new THREE.BufferGeometry();
+                geo.setAttribute('position', new THREE.Float32BufferAttribute(posOut, 3));
+                if (normOut.length) geo.setAttribute('normal', new THREE.Float32BufferAttribute(normOut, 3));
+                else geo.computeVertexNormals();
 
-                // Solid mesh
+                const def = mtlMap[matName] || {};
+                const kd  = def.Kd || [0.8, 0.8, 0.8];
+                const ks  = def.Ks || [0, 0, 0];
+                const ns  = def.Ns !== undefined ? def.Ns : 30;
                 const mat = new THREE.MeshPhongMaterial({
-                    color: 0xcccccc,
-                    emissive: 0x111111,
-                    specular: 0xffffff,
-                    shininess: 60,
+                    color:    new THREE.Color(kd[0], kd[1], kd[2]),
+                    specular: new THREE.Color(ks[0], ks[1], ks[2]),
+                    shininess: ns,
                     side: THREE.DoubleSide,
                 });
-                const mesh = new THREE.Mesh(geo, mat);
-                scene.add(mesh);
+                group.add(new THREE.Mesh(geo, mat));
+            }
 
-                // Wireframe overlay
-                const wireMat = new THREE.MeshBasicMaterial({
-                    color: 0xffffff,
-                    wireframe: true,
-                    opacity: 0.08,
-                    transparent: true,
-                });
-                scene.add(new THREE.Mesh(geo, wireMat));
-            })
-            .catch(() => {
-                // Fallback: show a placeholder box so the viewer isn't blank
-                const geo = new THREE.BoxGeometry(1, 1.4, 0.2);
-                const mat = new THREE.MeshPhongMaterial({ color: 0xcccccc, specular: 0xffffff, shininess: 40 });
-                scene.add(new THREE.Mesh(geo, mat));
-                scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, opacity: 0.08, transparent: true })));
-                camera.position.set(0, 0, 3);
-            });
+            // Centre and scale
+            const box = new THREE.Box3().setFromObject(group);
+            const center = new THREE.Vector3();
+            box.getCenter(center);
+            group.position.sub(center);
+            const size = new THREE.Vector3();
+            box.getSize(size);
+            const maxDim = Math.max(size.x, size.y, size.z);
+            scene.add(group);
+
+            camera.position.set(0, 0, maxDim * 1.6);
+            camera.near = maxDim * 0.001;
+            camera.far  = maxDim * 10;
+            camera.updateProjectionMatrix();
+        }).catch(() => {
+            const geo = new THREE.BoxGeometry(1, 1.4, 0.2);
+            const mat = new THREE.MeshPhongMaterial({ color: 0xcccccc, specular: 0xffffff, shininess: 40 });
+            scene.add(new THREE.Mesh(geo, mat));
+            camera.position.set(0, 0, 3);
+        });
 
         // --- Drag-to-rotate ---
         let isDragging = false;
