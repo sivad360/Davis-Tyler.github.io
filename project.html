@@ -694,14 +694,29 @@
         const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
 
         // --- Lights ---
-        const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+        // Low ambient so shadows have real depth
+        const ambient = new THREE.AmbientLight(0xffffff, 0.15);
         scene.add(ambient);
-        const dirA = new THREE.DirectionalLight(0xffffff, 1.0);
-        dirA.position.set(1, 2, 2);
-        scene.add(dirA);
-        const dirB = new THREE.DirectionalLight(0xffffff, 0.4);
-        dirB.position.set(-2, -1, -1);
-        scene.add(dirB);
+
+        // Key light — strong, upper-right-front
+        const key = new THREE.DirectionalLight(0xffffff, 2.2);
+        key.position.set(3, 5, 3);
+        scene.add(key);
+
+        // Fill light — opposite side, soft, reduces harsh shadows
+        const fill = new THREE.DirectionalLight(0xffffff, 0.35);
+        fill.position.set(-4, 1, 2);
+        scene.add(fill);
+
+        // Rim light — behind and above, separates subject from background
+        const rim = new THREE.DirectionalLight(0xffffff, 1.1);
+        rim.position.set(-1, 4, -5);
+        scene.add(rim);
+
+        // Ground bounce — subtle, simulates light reflecting off a floor
+        const bounce = new THREE.DirectionalLight(0xfff8f0, 0.25);
+        bounce.position.set(0, -4, 2);
+        scene.add(bounce);
 
         // --- Parse MTL ---
         function parseMTL(text) {
