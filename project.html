@@ -611,9 +611,10 @@
         scene.add(bounce);
 
         // --- Load GLB ---
+        let model = null;
         const loader = new THREE.GLTFLoader();
         loader.load('./vest%20render.glb', function (gltf) {
-            const model = gltf.scene;
+            model = gltf.scene;
 
             const box = new THREE.Box3().setFromObject(model);
             const center = new THREE.Vector3();
@@ -690,8 +691,10 @@
                 rotX += velX; rotY += velY;
                 if (Math.abs(velX) < 0.0001 && Math.abs(velY) < 0.0001) autoRotate = true;
             }
-            scene.rotation.x = rotX;
-            scene.rotation.y = rotY;
+            if (model) {
+                model.rotation.x = rotX;
+                model.rotation.y = rotY;
+            }
             renderer.render(scene, camera);
         }
         animate();
