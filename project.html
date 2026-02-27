@@ -77,7 +77,7 @@
         
         /* Header */
         header {
-            margin-bottom: 10vw;
+            margin-bottom: clamp(3rem, 7vw, 7rem);
             opacity: 0;
             animation: slideIn 1s var(--timing) 0.2s forwards;
         }
@@ -128,7 +128,7 @@
         
         /* Sections */
         section {
-            margin-bottom: 12vw;
+            margin-bottom: clamp(4rem, 8vw, 9rem);
             opacity: 0;
             animation: fadeIn 0.8s var(--timing) forwards;
         }
@@ -145,7 +145,7 @@
             font-weight: 400;
             letter-spacing: 0.3em;
             opacity: 0.6;
-            margin-bottom: 3vw;
+            margin-bottom: 1.75rem;
         }
         
         h2 {
@@ -173,6 +173,15 @@
         
         .image-grid.two-col {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Hero + three below layout */
+        .image-grid.hero-lead {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .image-grid.hero-lead .image-wrapper:first-child {
+            grid-column: 1 / -1;
         }
         
         .image-wrapper {
@@ -210,6 +219,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .image-wrapper.portrait {
+            aspect-ratio: 3/4;
         }
 
         .image-wrapper.contain img {
@@ -321,6 +334,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 2rem 3rem;
+            flex-wrap: wrap;
         }
 
         .footer-nav a {
@@ -348,6 +362,27 @@
 
         .footer-nav a:hover::after {
             width: 100%;
+        }
+
+        .webgl-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(0.55rem, 1vw, 0.7rem);
+            letter-spacing: 0.3em;
+            opacity: 0.4;
+            pointer-events: none;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.15; }
+        }
+
+        .webgl-loading.hidden {
+            display: none;
         }
 
         /* WebGL Viewer */
@@ -407,6 +442,14 @@
             .next-project {
                 padding: 8vw 6vw;
             }
+
+            .image-grid.hero-lead {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .image-grid.hero-lead .image-wrapper:first-child {
+                grid-column: 1 / -1;
+            }
         }
     </style>
 </head>
@@ -429,25 +472,19 @@
             </p>
         </header>
         
+        <main>
+
+        <!-- 1. Hero: finished product first -->
         <section>
             <div class="image-grid">
                 <div class="webgl-wrapper" id="webgl-container">
                     <span class="webgl-hint">DRAG TO ROTATE</span>
+                    <div class="webgl-loading" id="webgl-loading">LOADING MODEL</div>
                 </div>
             </div>
         </section>
         
-        <section>
-            <div class="image-grid two-col">
-                <div class="image-wrapper contain">
-                    <img src="images/projects/properfckinvestlad8212025 38 40_2.png" alt="Vest back 38/40">
-                </div>
-                <div class="image-wrapper contain">
-                    <img src="images/projects/properfckinvestlad8212025 38 40_1.png" alt="Vest front 38/40">
-                </div>
-            </div>
-        </section>
-
+        <!-- 2. Problem: now the reader cares why -->
         <section>
             <div class="section-label">OVERVIEW</div>
             <h2>The Problem</h2>
@@ -460,7 +497,26 @@
                 and what a well-designed storage solution would need to accomplish.]
             </p>
         </section>
+
+        <!-- 3. Shop visit: real-world context, one image leads -->
+        <section>
+            <div class="image-grid hero-lead">
+                <div class="image-wrapper">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6614.jpg" alt="LOAM Shop Visit">
+                </div>
+                <div class="image-wrapper">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6617.jpg" alt="LOAM Shop Visit">
+                </div>
+                <div class="image-wrapper">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6618.jpg" alt="LOAM Shop Visit">
+                </div>
+                <div class="image-wrapper">
+                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6622.jpg" alt="LOAM Shop Visit">
+                </div>
+            </div>
+        </section>
         
+        <!-- 4. Approach: how the design was developed digitally -->
         <section>
             <div class="section-label">APPROACH</div>
             <h2>Digital Pattern Making</h2>
@@ -478,10 +534,10 @@
                 <div class="detail-item">
                     <h3>Tools & Technologies</h3>
                     <ul>
-                        <li>Figma / Sketch</li>
-                        <li>React / Next.js</li>
-                        <li>GSAP Animation</li>
-                        <li>Three.js / WebGL</li>
+                        <li>CLO 3D</li>
+                        <li>Adobe Illustrator</li>
+                        <li>Physical Toile</li>
+                        <li>Sewing Machine</li>
                     </ul>
                 </div>
                 
@@ -507,23 +563,7 @@
             </div>
         </section>
 
-        <section>
-            <div class="image-grid two-col">
-                <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6614.jpg" alt="LOAM Shop Visit">
-                </div>
-                <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6617.jpg" alt="LOAM Shop Visit">
-                </div>
-                <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6618.jpg" alt="LOAM Shop Visit">
-                </div>
-                <div class="image-wrapper">
-                    <img src="images/projects/PaulKalifatidi_LOAMShopVisit-6622.jpg" alt="LOAM Shop Visit">
-                </div>
-            </div>
-        </section>
-
+        <!-- 5. Pattern screenshot: the digital artifact, evidence of the process -->
         <section>
             <div class="image-grid">
                 <div class="image-wrapper hero contain">
@@ -531,7 +571,20 @@
                 </div>
             </div>
         </section>
+
+        <!-- 6. Front/back renders: digital to physical bridge -->
+        <section>
+            <div class="image-grid two-col">
+                <div class="image-wrapper portrait contain">
+                    <img src="images/projects/properfckinvestlad8212025 38 40_2.png" alt="Vest back 38/40">
+                </div>
+                <div class="image-wrapper portrait contain">
+                    <img src="images/projects/properfckinvestlad8212025 38 40_1.png" alt="Vest front 38/40">
+                </div>
+            </div>
+        </section>
         
+        <!-- 7. Results: landing the story -->
         <section>
             <div class="section-label">RESULTS</div>
             <h2>First Fit</h2>
@@ -553,20 +606,17 @@
             </a>
         </section>
         
+        </main>
+        
         <footer>
             <div class="footer-nav">
-                <div class="footer-nav-main">
-                    <a href="./archive.html">Projects</a>
-                    <a href="#trips">Trips</a>
-                    <a href="#photography">Photography</a>
-                    <a href="#resources">Resources</a>
-                    <a href="./archive.html">Archive</a>
-                </div>
                 <div class="footer-nav-main">
                     <a href="./">Home</a>
                     <a href="./archive.html">Projects</a>
                     <a href="#trips">Trips</a>
                     <a href="#photography">Photography</a>
+                    <a href="#resources">Resources</a>
+                    <a href="./archive.html">Archive</a>
                 </div>
             </div>
         </footer>
@@ -626,6 +676,7 @@
             const maxDim = Math.max(size.x, size.y, size.z);
 
             scene.add(model);
+            document.getElementById('webgl-loading').classList.add('hidden');
 
             camera.position.set(0, 0, maxDim * 1.6);
             camera.near = maxDim * 0.001;
