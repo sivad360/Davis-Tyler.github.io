@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mt. Baker Sea to Summit — Davis Tyler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #E4007C;
+            --yellow: #FFF700;
+            --timing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--magenta);
+            color: var(--yellow);
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        ::selection {
+            background: var(--yellow);
+            color: var(--magenta);
+        }
+
+        .container {
+            min-height: 100vh;
+            padding: 6vw;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8vw;
+            padding-bottom: 3vw;
+            border-bottom: 2px solid var(--yellow);
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) forwards;
+        }
+
+        .nav-logo {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--yellow);
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            opacity: 0.7;
+        }
+
+        .nav-back {
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            text-decoration: none;
+            color: var(--yellow);
+            transition: transform 0.3s var(--timing);
+            display: inline-block;
+        }
+
+        .nav-back:hover {
+            transform: translateX(-5px);
+        }
+
+        /* Header */
+        header {
+            margin-bottom: clamp(3rem, 7vw, 7rem);
+            opacity: 0;
+            animation: slideIn 1s var(--timing) 0.2s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .trip-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 3rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+            opacity: 0.7;
+        }
+
+        .trip-meta span {
+            letter-spacing: 0.1em;
+        }
+
+        h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+
+        .trip-intro {
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            line-height: 1.7;
+            max-width: 65ch;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: clamp(4rem, 8vw, 9rem);
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) forwards;
+        }
+
+        section:nth-child(2) { animation-delay: 0.4s; }
+        section:nth-child(3) { animation-delay: 0.5s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.7s; }
+        section:nth-child(6) { animation-delay: 0.8s; }
+        section:nth-child(7) { animation-delay: 0.9s; }
+
+        .section-label {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            opacity: 0.6;
+            margin-bottom: 1.75rem;
+        }
+
+        h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 70ch;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0;
+            border: 2px solid var(--yellow);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 3vw;
+        }
+
+        .stat {
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            border-right: 2px solid var(--yellow);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat-label {
+            font-size: clamp(0.55rem, 1vw, 0.65rem);
+            letter-spacing: 0.25em;
+            opacity: 0.5;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-value {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-unit {
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            opacity: 0.6;
+            margin-top: 0.3rem;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            gap: 3vw;
+            margin-top: 4vw;
+        }
+
+        .image-grid.two-col {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .image-grid.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .image-grid.hero-lead {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .image-grid.hero-lead .image-wrapper:first-child {
+            grid-column: 1 / -1;
+        }
+
+        .image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--yellow);
+            border-radius: 6px;
+            aspect-ratio: 16/10;
+            background: rgba(255, 247, 0, 0.05);
+            transition: transform 0.5s var(--timing);
+        }
+
+        .image-wrapper:hover {
+            transform: scale(0.98);
+        }
+
+        .image-wrapper.hero {
+            aspect-ratio: 21/9;
+            grid-column: 1 / -1;
+        }
+
+        .image-wrapper.square {
+            aspect-ratio: 1/1;
+        }
+
+        .image-wrapper.portrait {
+            aspect-ratio: 3/4;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Day-by-day Log */
+        .day-log {
+            margin-top: 3vw;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .day-entry {
+            display: grid;
+            grid-template-columns: clamp(3rem, 6vw, 5rem) 1fr;
+            gap: 3vw;
+            padding: clamp(2rem, 4vw, 3rem) 0;
+            border-top: 1px solid rgba(255, 247, 0, 0.3);
+            align-items: start;
+        }
+
+        .day-entry:last-child {
+            border-bottom: 1px solid rgba(255, 247, 0, 0.3);
+        }
+
+        .day-number {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            font-weight: 800;
+            opacity: 0.4;
+            letter-spacing: 0.1em;
+            padding-top: 0.2rem;
+        }
+
+        .day-content h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .day-content p {
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .day-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            opacity: 0.5;
+            letter-spacing: 0.15em;
+        }
+
+        /* Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 4vw;
+            margin-top: 3vw;
+        }
+
+        .detail-item h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .detail-item ul {
+            list-style: none;
+        }
+
+        .detail-item li {
+            font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+            line-height: 1.8;
+            opacity: 0.7;
+        }
+
+        .detail-item li::before {
+            content: '→ ';
+            opacity: 0.5;
+        }
+
+        /* Next Trip */
+        .next-trip {
+            border: 4px solid var(--yellow);
+            border-radius: 6px;
+            padding: 6vw;
+            cursor: pointer;
+            transition: all 0.6s var(--timing);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            color: var(--yellow);
+        }
+
+        .next-trip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--yellow);
+            transition: left 0.6s var(--timing);
+            z-index: 0;
+        }
+
+        .next-trip:hover::before {
+            left: 0;
+        }
+
+        .next-trip:hover {
+            color: var(--magenta);
+        }
+
+        .next-trip > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .next-label {
+            font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .next-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 2px solid var(--yellow);
+            padding-top: 3rem;
+            margin-top: 10vw;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--timing) 1s forwards;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+        }
+
+        .footer-nav-main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem 3rem;
+        }
+
+        .footer-nav a {
+            color: var(--yellow);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s var(--timing);
+        }
+
+        .footer-nav a:hover {
+            transform: translateX(10px);
+        }
+
+        .footer-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--yellow);
+            transition: width 0.4s var(--timing);
+        }
+
+        .footer-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 6vw 4vw;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat {
+                border-bottom: 2px solid var(--yellow);
+            }
+
+            .stat:nth-child(even) {
+                border-right: none;
+            }
+
+            .stat:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .day-entry {
+                grid-template-columns: 3rem 1fr;
+                gap: 1.5rem;
+            }
+
+            .next-trip {
+                padding: 8vw 6vw;
+            }
+
+            .image-grid.three-col {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .image-grid.hero-lead {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .image-grid.hero-lead .image-wrapper:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="nav-logo">DT</a>
+            <a href="index.html#trips" class="nav-back">← Back to Trips</a>
+        </nav>
+
+        <header>
+            <div class="trip-meta">
+                <span>NORTH CASCADES · WASHINGTON</span>
+                <span>BIKE · SKI</span>
+                <span>1 DAY · MARCH 2024</span>
+            </div>
+            <h1>Mt. Baker Sea to Summit</h1>
+            <p class="trip-intro">
+                [Intro — placeholder]
+            </p>
+        </header>
+
+        <main>
+
+            <!-- Stats Bar -->
+            <section>
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="stat-label">DISTANCE</div>
+                        <div class="stat-value">~80</div>
+                        <div class="stat-unit">MI TOTAL</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">ELEVATION GAIN</div>
+                        <div class="stat-value">~10,700</div>
+                        <div class="stat-unit">FT</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">DURATION</div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-unit">DAY</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">SUMMIT</div>
+                        <div class="stat-value">10,781</div>
+                        <div class="stat-unit">FT</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">ACTIVITY</div>
+                        <div class="stat-value">BIKE · SKI</div>
+                        <div class="stat-unit">&nbsp;</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hero Image -->
+            <section>
+                <div class="image-grid">
+                    <div class="image-wrapper hero">
+                        <img src="images/baker lake to diablo lake/6215-010.jpg" alt="Mt. Baker Sea to Summit">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Overview -->
+            <section>
+                <div class="section-label">OVERVIEW</div>
+                <h2>[Overview heading — placeholder]</h2>
+                <p>[Overview copy — placeholder]</p>
+                <p>[Overview copy — placeholder]</p>
+            </section>
+
+            <!-- Image Grid -->
+            <section>
+                <div class="image-grid hero-lead">
+                    <div class="image-wrapper">
+                        <img src="images/baker lake to diablo lake/6215-013.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="images/baker lake to diablo lake/6215-017.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="images/baker lake to diablo lake/6215-018.jpg" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Route / Day Log -->
+            <section>
+                <div class="section-label">ROUTE</div>
+                <h2>[Route heading — placeholder]</h2>
+                <p>[Route overview copy — placeholder]</p>
+
+                <div class="day-log">
+                    <div class="day-entry">
+                        <div class="day-number">LEG 01</div>
+                        <div class="day-content">
+                            <h3>[Leg title — placeholder]</h3>
+                            <p>[Leg description — placeholder]</p>
+                            <div class="day-stats">
+                                <span>[DISTANCE — placeholder]</span>
+                                <span>[GAIN — placeholder]</span>
+                                <span>[MODE — placeholder]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-entry">
+                        <div class="day-number">LEG 02</div>
+                        <div class="day-content">
+                            <h3>[Leg title — placeholder]</h3>
+                            <p>[Leg description — placeholder]</p>
+                            <div class="day-stats">
+                                <span>[DISTANCE — placeholder]</span>
+                                <span>[GAIN — placeholder]</span>
+                                <span>[MODE — placeholder]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-entry">
+                        <div class="day-number">LEG 03</div>
+                        <div class="day-content">
+                            <h3>[Leg title — placeholder]</h3>
+                            <p>[Leg description — placeholder]</p>
+                            <div class="day-stats">
+                                <span>[DISTANCE — placeholder]</span>
+                                <span>[GAIN — placeholder]</span>
+                                <span>[MODE — placeholder]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- More Images -->
+            <section>
+                <div class="image-grid two-col">
+                    <div class="image-wrapper">
+                        <img src="images/baker lake to diablo lake/6215-021.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper portrait">
+                        <img src="images/baker lake to diablo lake/6215-022.jpg" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gear / Details -->
+            <section>
+                <div class="section-label">GEAR</div>
+                <h2>[Gear heading — placeholder]</h2>
+                <p>[Gear notes — placeholder]</p>
+
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <h3>Bike</h3>
+                        <ul>
+                            <li>[Bike — placeholder]</li>
+                            <li>[Bags — placeholder]</li>
+                            <li>[Tires — placeholder]</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-item">
+                        <h3>Ski</h3>
+                        <ul>
+                            <li>[Skis — placeholder]</li>
+                            <li>[Boots — placeholder]</li>
+                            <li>[Skins — placeholder]</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-item">
+                        <h3>Safety</h3>
+                        <ul>
+                            <li>[Beacon — placeholder]</li>
+                            <li>[Probe — placeholder]</li>
+                            <li>[Shovel — placeholder]</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-item">
+                        <h3>Conditions</h3>
+                        <ul>
+                            <li>[Snowpack — placeholder]</li>
+                            <li>[Avalanche rating — placeholder]</li>
+                            <li>[Weather — placeholder]</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Trip -->
+            <section>
+                <a href="index.html#trips" class="next-trip">
+                    <div class="next-label">ALL TRIPS</div>
+                    <h2 class="next-title">Back to Index</h2>
+                </a>
+            </section>
+
+        </main>
+
+        <footer>
+            <div class="footer-nav">
+                <div class="footer-nav-main">
+                    <a href="./">Home</a>
+                    <a href="./#projects">Projects</a>
+                    <a href="./#trips">Trips</a>
+                    <a href="./#photography">Photography</a>
+                    <a href="./#resources">Resources</a>
+                    <a href="./archive.html">Archive</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
