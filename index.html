@@ -7,98 +7,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --magenta: #E4007C;
-            --yellow: #FFF700;
-            --timing: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: var(--magenta);
-            color: var(--yellow);
-            font-family: 'JetBrains Mono', monospace;
-            overflow-x: hidden;
-            cursor: crosshair;
-        }
-        
-        ::selection {
-            background: var(--yellow);
-            color: var(--magenta);
-        }
-        
-        .container {
-            min-height: 100vh;
-            padding: 6vw;
-        }
-        
-        /* PEEK NEXT SECTION: Header takes exactly 100vh minus peek amount */
+        /* Homepage header overrides shared detail-page defaults */
         header {
             min-height: calc(100vh - 15vw);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            margin-bottom: 0;
+            opacity: 1;
             animation: slideIn 1.2s var(--timing);
         }
-        
+
         section {
             margin-bottom: 12vw;
-            opacity: 0;
-            animation: fadeIn 0.8s var(--timing) forwards;
         }
-        
+
         section:nth-child(2) { animation-delay: 0.5s; }
         section:nth-child(3) { animation-delay: 0.6s; }
         section:nth-child(4) { animation-delay: 0.7s; }
         section:nth-child(5) { animation-delay: 0.8s; }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
+
         h1 {
-            font-family: 'Bricolage Grotesque', sans-serif;
             font-size: clamp(3rem, 15vw, 12rem);
-            font-weight: 800;
             line-height: 0.85;
             letter-spacing: -0.04em;
             margin-bottom: 1rem;
             text-transform: uppercase;
         }
-        
+
         .subtitle {
             font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 400;
             opacity: 0;
             animation: fadeIn 0.8s var(--timing) 0.3s forwards;
         }
-        
-        .section-label {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(0.8rem, 1.5vw, 1rem);
-            font-weight: 400;
-            letter-spacing: 0.3em;
-            opacity: 0.6;
-            margin-bottom: 3vw;
-        }
-        
+
+        .section-label { margin-bottom: 3vw; }
+
+        /* Hero card */
         .hero-card {
             border: 4px solid var(--yellow);
             border-radius: 6px;
@@ -109,7 +56,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero-card::before {
             content: '';
             position: absolute;
@@ -121,20 +68,11 @@
             transition: left 0.6s var(--timing);
             z-index: 0;
         }
-        
-        .hero-card:hover::before {
-            left: 0;
-        }
-        
-        .hero-card:hover {
-            color: var(--magenta);
-        }
-        
-        .hero-card > * {
-            position: relative;
-            z-index: 1;
-        }
-        
+
+        .hero-card:hover::before { left: 0; }
+        .hero-card:hover { color: var(--magenta); }
+        .hero-card > * { position: relative; z-index: 1; }
+
         .hero-title {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: clamp(2.5rem, 8vw, 6rem);
@@ -143,7 +81,7 @@
             margin-bottom: 2rem;
             letter-spacing: -0.02em;
         }
-        
+
         .hero-meta {
             display: flex;
             flex-direction: column;
@@ -152,27 +90,26 @@
             font-size: clamp(0.65rem, 1.2vw, 0.75rem);
             opacity: 0.8;
         }
-        
+
         .hero-description {
             font-size: clamp(0.75rem, 1.5vw, 0.9rem);
             line-height: 1.6;
             max-width: 60ch;
             opacity: 0.9;
         }
-        
+
+        /* Cards grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3vw;
         }
-        
-        /* NEW CARD STYLES WITH IMAGE */
+
         .card {
             border: 3px solid var(--yellow);
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.5s var(--timing);
-            position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -180,10 +117,8 @@
             color: var(--yellow);
             text-decoration: none;
         }
-        
-        .card:hover {
-            transform: translateY(-8px);
-        }
+
+        .card:hover { transform: translateY(-8px); }
 
         .card-image-wrapper {
             width: 100%;
@@ -211,9 +146,7 @@
             transition: transform 0.6s var(--timing);
         }
 
-        .card:hover .card-image {
-            transform: scale(1.05);
-        }
+        .card:hover .card-image { transform: scale(1.05); }
 
         .card-content {
             padding: 4vw 3vw;
@@ -221,7 +154,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .card-title {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: clamp(1.5rem, 3.5vw, 2.2rem);
@@ -229,7 +162,7 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
         }
-        
+
         .card-meta {
             font-size: clamp(0.6rem, 1vw, 0.7rem);
             margin-bottom: 1rem;
@@ -238,18 +171,17 @@
             flex-direction: column;
             gap: 0.4rem;
         }
-        
+
         .card-description {
             font-size: clamp(0.7rem, 1.3vw, 0.8rem);
             line-height: 1.5;
             opacity: 0.85;
         }
-        
-        /* PHOTO CARDS - KEEP EXISTING STYLE */
+
+        /* Photo cards */
         .photo-card {
             border: 3px solid var(--yellow);
             border-radius: 6px;
-            padding: 0;
             cursor: pointer;
             transition: all 0.5s var(--timing);
             position: relative;
@@ -268,9 +200,7 @@
             transition: transform 0.6s var(--timing);
         }
 
-        .photo-card:hover .photo-card-image {
-            transform: scale(1.05);
-        }
+        .photo-card:hover .photo-card-image { transform: scale(1.05); }
 
         .photo-card::before {
             content: '';
@@ -280,9 +210,7 @@
             z-index: 1;
         }
 
-        .photo-card:hover {
-            transform: scale(1.02);
-        }
+        .photo-card:hover { transform: scale(1.02); }
 
         .photo-info {
             position: relative;
@@ -290,126 +218,28 @@
             padding: 2rem;
             width: 100%;
         }
-        
+
         .photo-title {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        
+
         .photo-meta {
             font-size: clamp(0.6rem, 1vw, 0.7rem);
             opacity: 0.8;
         }
-        
-        .resources-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2vw;
-        }
-        
-        .resource-item {
-            border-top: 2px solid var(--yellow);
-            padding: 2vw 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-            cursor: pointer;
-            transition: all 0.4s var(--timing);
-        }
-        
-        .resource-item:hover {
-            padding-left: 2rem;
-        }
-        
-        .resource-name {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            font-weight: 600;
-        }
-        
-        .resource-type {
-            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
-            opacity: 0.7;
-            text-align: right;
-        }
-        
-        footer {
-            border-top: 2px solid var(--yellow);
-            padding-top: 3rem;
-            margin-top: 10vw;
-            opacity: 0;
-            animation: fadeIn 0.8s var(--timing) 1s forwards;
-        }
-        
-        .footer-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
-        }
 
-        .footer-nav-main {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 2rem 3rem;
-        }
-
-        .footer-nav a {
-            color: var(--yellow);
-            text-decoration: none;
-            position: relative;
-            display: inline-block;
-            transition: transform 0.3s var(--timing);
-        }
-
-        .footer-nav a:hover {
-            transform: translateX(10px);
-        }
-
-        .footer-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--yellow);
-            transition: width 0.4s var(--timing);
-        }
-
-        .footer-nav a:hover::after {
-            width: 100%;
-        }
-        
         @media (max-width: 768px) {
             header {
                 min-height: auto;
                 margin-bottom: 10vw;
             }
-            
-            .container {
-                padding: 6vw 4vw;
-            }
-            
-            .hero-card {
-                padding: 8vw 6vw;
-            }
-            
-            .card-content {
-                padding: 8vw 6vw;
-            }
-            
-            .resource-item {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
 
-            .card-image-wrapper {
-                aspect-ratio: 16/9;
-            }
+            .hero-card { padding: 8vw 6vw; }
+            .card-content { padding: 8vw 6vw; }
+            .card-image-wrapper { aspect-ratio: 16/9; }
         }
     </style>
 </head>
@@ -423,7 +253,7 @@
         <section id="projects">
             <div class="section-label">PROJECTS</div>
             
-            <a href="./project.html" style="text-decoration: none; color: inherit;">
+            <a href="./bike-vest.html" style="text-decoration: none; color: inherit;">
             <div class="hero-card">
                 <h2 class="hero-title">Bike Vest</h2>
                 <div class="hero-meta">
@@ -522,7 +352,7 @@
                     </div>
                 </a>
 
-                <div class="card">
+                <a href="gannett-peak.html" class="card">
                     <div class="card-image-wrapper">
                         <img src="./images/projects/LOAM_BarBag_Product2K.png" alt="Gannett Peak" class="card-image">
                     </div>
@@ -537,9 +367,9 @@
                             Ski approach and ascent of Wyoming's highest point.
                         </p>
                     </div>
-                </div>
+                </a>
 
-                <div class="card">
+                <a href="baker-diablo-traverse.html" class="card">
                     <div class="card-image-wrapper">
                         <img src="./images/projects/LOAM-7.jpg" alt="Baker Lake to Diablo Lake Traverse" class="card-image">
                     </div>
@@ -554,7 +384,7 @@
                             Cross-country traverse through the North Cascades from Baker Lake to Diablo Lake.
                         </p>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
         
@@ -562,29 +392,29 @@
             <div class="section-label">PHOTOGRAPHY</div>
             
             <div class="cards-grid">
-                <div class="photo-card">
+                <a href="portrait-series.html" class="photo-card">
                     <img src="./images/photography/4149_007.jpg" alt="Portrait Series" class="photo-card-image">
                     <div class="photo-info">
                         <div class="photo-title">Portrait Series</div>
                         <div class="photo-meta">24 IMAGES</div>
                     </div>
-                </div>
-                
-                <div class="photo-card">
+                </a>
+
+                <a href="urban-landscapes.html" class="photo-card">
                     <img src="./images/photography/4149_011%20copy.jpg" alt="Urban Landscapes" class="photo-card-image">
                     <div class="photo-info">
                         <div class="photo-title">Urban Landscapes</div>
                         <div class="photo-meta">32 IMAGES</div>
                     </div>
-                </div>
-                
-                <div class="photo-card">
+                </a>
+
+                <a href="film-photography.html" class="photo-card">
                     <img src="./images/photography/6215-017%20copy.jpg" alt="Film Photography" class="photo-card-image">
                     <div class="photo-info">
                         <div class="photo-title">Film Photography</div>
                         <div class="photo-meta">18 IMAGES</div>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
         

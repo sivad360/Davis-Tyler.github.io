@@ -7,112 +7,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --magenta: #E4007C;
-            --yellow: #FFF700;
-            --timing: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: var(--magenta);
-            color: var(--yellow);
-            font-family: 'JetBrains Mono', monospace;
-            overflow-x: hidden;
-            cursor: crosshair;
-        }
-        
-        ::selection {
-            background: var(--yellow);
-            color: var(--magenta);
-        }
-        
+        /* Archive-specific container */
         .container {
-            min-height: 100vh;
-            padding: 6vw;
             max-width: 1600px;
             margin: 0 auto;
         }
-        
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6vw;
-            padding-bottom: 3vw;
-            border-bottom: 2px solid var(--yellow);
-            opacity: 0;
-            animation: fadeIn 0.8s var(--timing) forwards;
-        }
-        
-        .nav-logo {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            font-weight: 800;
-            text-decoration: none;
-            color: var(--yellow);
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-logo:hover {
-            opacity: 0.7;
-        }
-        
-        .nav-back {
-            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-            text-decoration: none;
-            color: var(--yellow);
-            transition: transform 0.3s var(--timing);
-            display: inline-block;
-        }
-        
-        .nav-back:hover {
-            transform: translateX(-5px);
-        }
-        
-        /* Header */
+
+        nav { margin-bottom: 6vw; }
+
         header {
             margin-bottom: 6vw;
-            opacity: 0;
-            animation: slideIn 1s var(--timing) 0.2s forwards;
+            opacity: 1;
+            animation: none;
         }
-        
-        h1 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-        }
-        
+
+        h1 { margin-bottom: 1.5rem; }
+
         .subtitle {
             font-size: clamp(0.9rem, 1.8vw, 1.1rem);
             opacity: 0.7;
         }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        /* No fade-in on archive footer */
+        footer {
+            opacity: 1;
+            animation: none;
         }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
+
         /* Filter Bar */
         .filter-bar {
             display: flex;
@@ -122,7 +45,7 @@
             opacity: 0;
             animation: fadeIn 0.8s var(--timing) 0.4s forwards;
         }
-        
+
         .filter-btn {
             font-family: 'JetBrains Mono', monospace;
             font-size: clamp(0.7rem, 1.2vw, 0.85rem);
@@ -137,7 +60,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .filter-btn::before {
             content: '';
             position: absolute;
@@ -149,22 +72,15 @@
             transition: left 0.4s var(--timing);
             z-index: 0;
         }
-        
+
         .filter-btn:hover::before,
-        .filter-btn.active::before {
-            left: 0;
-        }
-        
+        .filter-btn.active::before { left: 0; }
+
         .filter-btn:hover,
-        .filter-btn.active {
-            color: var(--magenta);
-        }
-        
-        .filter-btn span {
-            position: relative;
-            z-index: 1;
-        }
-        
+        .filter-btn.active { color: var(--magenta); }
+
+        .filter-btn span { position: relative; z-index: 1; }
+
         /* Archive Grid */
         .archive-grid {
             display: grid;
@@ -172,7 +88,7 @@
             gap: 3vw;
             margin-bottom: 8vw;
         }
-        
+
         .archive-item {
             border: 3px solid var(--yellow);
             border-radius: 6px;
@@ -180,7 +96,6 @@
             color: var(--yellow);
             cursor: pointer;
             transition: all 0.5s var(--timing);
-            position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -188,7 +103,7 @@
             opacity: 0;
             animation: fadeIn 0.6s var(--timing) forwards;
         }
-        
+
         .archive-item:nth-child(1) { animation-delay: 0.5s; }
         .archive-item:nth-child(2) { animation-delay: 0.55s; }
         .archive-item:nth-child(3) { animation-delay: 0.6s; }
@@ -198,15 +113,10 @@
         .archive-item:nth-child(7) { animation-delay: 0.8s; }
         .archive-item:nth-child(8) { animation-delay: 0.85s; }
         .archive-item:nth-child(9) { animation-delay: 0.9s; }
-        
-        .archive-item:hover {
-            transform: translateY(-8px);
-        }
-        
-        .archive-item.hidden {
-            display: none;
-        }
-        
+
+        .archive-item:hover { transform: translateY(-8px); }
+        .archive-item.hidden { display: none; }
+
         .item-image {
             width: 100%;
             aspect-ratio: 4/3;
@@ -214,18 +124,16 @@
             position: relative;
             background: rgba(255, 247, 0, 0.05);
         }
-        
+
         .item-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s var(--timing);
         }
-        
-        .archive-item:hover .item-image img {
-            transform: scale(1.05);
-        }
-        
+
+        .archive-item:hover .item-image img { transform: scale(1.05); }
+
         .item-placeholder {
             width: 100%;
             height: 100%;
@@ -236,21 +144,21 @@
             opacity: 0.3;
             letter-spacing: 0.2em;
         }
-        
+
         .item-content {
             padding: 4vw 3vw;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .item-category {
             font-size: clamp(0.6rem, 1vw, 0.7rem);
             opacity: 0.6;
             margin-bottom: 1rem;
             letter-spacing: 0.2em;
         }
-        
+
         .item-title {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: clamp(1.5rem, 3.5vw, 2rem);
@@ -258,7 +166,7 @@
             line-height: 1.1;
             margin-bottom: 1rem;
         }
-        
+
         .item-meta {
             font-size: clamp(0.6rem, 1vw, 0.7rem);
             opacity: 0.5;
@@ -266,7 +174,7 @@
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .item-description {
             font-size: clamp(0.75rem, 1.3vw, 0.85rem);
             line-height: 1.6;
@@ -274,8 +182,7 @@
             margin-top: auto;
             padding-top: 1rem;
         }
-        
-        /* Stats */
+
         .archive-stats {
             display: flex;
             gap: 3rem;
@@ -285,90 +192,21 @@
             opacity: 0;
             animation: fadeIn 0.8s var(--timing) 0.3s forwards;
         }
-        
-        .stat {
+
+        .archive-stats .stat {
             letter-spacing: 0.1em;
         }
-        
-        .stat strong {
+
+        .archive-stats .stat strong {
             color: var(--yellow);
             font-weight: 400;
         }
-        
-        /* Footer */
-        footer {
-            border-top: 2px solid var(--yellow);
-            padding-top: 3rem;
-            margin-top: 10vw;
-        }
 
-        .footer-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
-        }
-
-        .footer-nav-main {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 2rem 3rem;
-        }
-
-        .footer-nav a {
-            color: var(--yellow);
-            text-decoration: none;
-            position: relative;
-            display: inline-block;
-            transition: transform 0.3s var(--timing);
-        }
-
-        .footer-nav a:hover {
-            transform: translateX(10px);
-        }
-
-        .footer-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--yellow);
-            transition: width 0.4s var(--timing);
-        }
-
-        .footer-nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 6vw 4vw;
-            }
-            
-            nav {
-                flex-direction: column;
-                gap: 2rem;
-                align-items: flex-start;
-            }
-            
-            .archive-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .filter-bar {
-                gap: 1rem;
-            }
-            
-            .filter-btn {
-                padding: 0.8rem 1.5rem;
-            }
-            
-            .item-content {
-                padding: 8vw 6vw;
-            }
+            .archive-grid { grid-template-columns: 1fr; }
+            .filter-bar { gap: 1rem; }
+            .filter-btn { padding: 0.8rem 1.5rem; }
+            .item-content { padding: 8vw 6vw; }
         }
     </style>
 </head>
@@ -399,7 +237,7 @@
         
         <div class="archive-grid">
             <!-- Projects -->
-            <a href="project.html" class="archive-item" data-category="projects">
+            <a href="bike-vest.html" class="archive-item" data-category="projects">
                 <div class="item-image">
                     <div class="item-placeholder">IMAGE 800×600</div>
                 </div>
