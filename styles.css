@@ -288,9 +288,10 @@ section:nth-child(7) { animation-delay: 0.9s; }
 }
 
 .tool-logo img {
-    width: 2rem;
-    height: 2rem;
-    opacity: 0.8;
+    width: 3rem;
+    height: 3rem;
+    opacity: 1;
+    object-fit: contain;
 }
 
 .tool-logo span {
@@ -362,6 +363,13 @@ section:nth-child(7) { animation-delay: 0.9s; }
     font-weight: 800;
     line-height: 0.95;
     letter-spacing: -0.02em;
+}
+
+/* ── Card link wrapper ──────────────────────────────────── */
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* ── Footer ─────────────────────────────────────────────── */
