@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Vest — Davis Tyler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            opacity: 0.3;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            letter-spacing: 0.2em;
+        }
+
+        /* WebGL Viewer */
+        .webgl-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 21/9;
+            border: 3px solid var(--yellow);
+            border-radius: 6px;
+            background: var(--magenta);
+            overflow: hidden;
+            grid-column: 1 / -1;
+        }
+
+        .webgl-wrapper canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .webgl-hint {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: clamp(0.55rem, 1vw, 0.7rem);
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .webgl-wrapper.interacted .webgl-hint {
+            opacity: 0;
+        }
+
+        .webgl-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(0.55rem, 1vw, 0.7rem);
+            letter-spacing: 0.3em;
+            opacity: 0.4;
+            pointer-events: none;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .webgl-loading.hidden { display: none; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.15; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="../index.html" class="nav-logo">DT</a>
+            <a href="../index.html" class="nav-back">← Back to Portfolio</a>
+        </nav>
+        
+        <header>
+            <div class="project-meta">
+                <span>PATTERN MAKING · CONSTRUCTION · DIGITAL SIMULATION</span>
+                <span>CLO 3D · SEWING MACHINE · ILLUSTRATOR</span>
+                <span>CYCLING · ACTION SPORTS · STORAGE</span>
+                <span>2025</span>
+            </div>
+            <h1>Bike Vest</h1>
+            <p class="project-intro">
+                Balanced, secure, and accessible storage for action sports.
+            </p>
+        </header>
+        
+        <main>
+
+        <!-- OPTIONAL: 3D viewer — remove this section if no GLB model -->
+        <section>
+            <div class="image-grid">
+                <div class="webgl-wrapper" id="webgl-container">
+                    <span class="webgl-hint">DRAG TO ROTATE</span>
+                    <div class="webgl-loading" id="webgl-loading">LOADING MODEL</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2. Problem: now the reader cares why -->
+        <section>
+            <div class="section-label">OVERVIEW</div>
+            <h2>The Problem</h2>
+            <p>
+                Trail and enduro riding demands carrying tools, nutrition, water, and clothing — securely,
+                accessibly, and without restricting movement. Hydration vests come closest but push storage
+                to the back, making it inaccessible on the move. Fanny packs bounce and shift. In-bike
+                storage is buried and slow to access.
+            </p>
+            <p>
+                The vest moves storage to the front of the body where it stays put, stays accessible,
+                and doesn't interfere with riding, running, or skiing. The goal: balanced, secure, and accessible storage.
+            </p>
+        </section>
+
+        <!-- 3. Shop visit: real-world context, one image leads -->
+        <section>
+            <div class="image-grid hero-lead">
+                <div class="image-wrapper">
+                    <img src="../images/projects/PaulKalifatidi_LOAMShopVisit-6614.jpg" alt="LOAM Shop Visit">
+                </div>
+                <div class="image-wrapper">
+                    <img src="../images/projects/PaulKalifatidi_LOAMShopVisit-6617.jpg" alt="LOAM Shop Visit">
+                </div>
+                <div class="image-wrapper">
+                    <img src="../images/projects/PaulKalifatidi_LOAMShopVisit-6618.jpg" alt="LOAM Shop Visit">
+                </div>
+                <div class="image-wrapper">
+                    <img src="../images/projects/PaulKalifatidi_LOAMShopVisit-6622.jpg" alt="LOAM Shop Visit">
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. Approach: how the design was developed digitally -->
+        <section>
+            <div class="section-label">APPROACH</div>
+            <h2>Digital Pattern Making</h2>
+            <p>
+                Each iteration was developed digitally in CLO 3D before cutting any material — simulating
+                fit, shape, and drape on a virtual body. This compresses the development cycle significantly:
+                problems that would take a physical toile to discover get caught in simulation first.
+            </p>
+            <p>
+                Patterns are exported from CLO, cleaned up in Illustrator, and cut on a laser cutter for
+                precision. Construction happens on a sewing machine, with each physical build informing
+                the next digital revision.
+            </p>
+            
+            <!-- OPTIONAL: details grid — add/remove detail-item blocks as needed -->
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li>CLO 3D</li>
+                        <li>Illustrator</li>
+                        <li>Sewing Machine</li>
+                        <li>Laser Cutter</li>
+                    </ul>
+                </div>
+
+                <div class="detail-item">
+                    <h3>Materials</h3>
+                    <ul>
+                        <li>[Shell fabric]</li>
+                        <li>[Liner fabric]</li>
+                        <li>[Hardware]</li>
+                    </ul>
+                </div>
+
+                <div class="detail-item">
+                    <h3>Status</h3>
+                    <ul>
+                        <li>First prototype complete</li>
+                        <li>Second iteration planned</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Pattern screenshot: the digital artifact, evidence of the process -->
+        <section>
+            <div class="image-grid">
+                <div class="image-wrapper hero contain">
+                    <img src="../images/projects/Screenshot 2026-02-23 at 11.01.34 PM.png" alt="Vest pattern pieces">
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Front/back renders: digital to physical bridge -->
+        <section>
+            <div class="image-grid two-col">
+                <div class="image-wrapper portrait contain">
+                    <img src="../images/projects/properfckinvestlad8212025 38 40_2.png" alt="Vest back 38/40">
+                </div>
+                <div class="image-wrapper portrait contain">
+                    <img src="../images/projects/properfckinvestlad8212025 38 40_1.png" alt="Vest front 38/40">
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7. Results: landing the story -->
+        <section>
+            <div class="section-label">RESULTS</div>
+            <h2>Iteration</h2>
+            <p>
+                Four prototypes in. The first was rectangular — bad shape, bad fit, poorly placed side
+                straps that bounced. The second improved shape and fit, patterned in Seamly. The third
+                moved to CLO, refining fit and shape further with better straps, though the construction
+                was overly complex. The fourth simplified significantly: best fit to date, integrated
+                closure, better straps.
+            </p>
+            <p>
+                A fifth prototype is in progress — continuing to refine shape, simplify construction,
+                and improve the closure system. The vest works well for trail and enduro riding and
+                has potential for gravel. The core concept is proven; the work now is refinement.
+            </p>
+        </section>
+        
+        <!-- NEXT PROJECT: update href and title for each project page -->
+        <section>
+            <a href="../index.html#projects" class="next-project">
+                <div class="next-label">ALL PROJECTS</div>
+                <h2 class="next-title">Back to Index</h2>
+            </a>
+        </section>
+        
+        </main>
+        
+        <footer>
+            <div class="footer-nav">
+                <div class="footer-nav-main">
+                    <a href="../">Home</a>
+                    <a href="../#projects">Projects</a>
+                    <a href="../#trips">Trips</a>
+                    <a href="../#photography">Photography</a>
+                    <a href="../#resources">Resources</a>
+                    <a href="../archive.html">Archive</a>
+                    <a href="../about.html">About</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+    (function () {
+        const container = document.getElementById('webgl-container');
+
+        // --- Renderer ---
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        container.appendChild(renderer.domElement);
+
+        // --- Scene & Camera ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
+
+        // --- Lights ---
+        const ambient = new THREE.AmbientLight(0xffffff, 0.15);
+        scene.add(ambient);
+
+        const key = new THREE.DirectionalLight(0xffffff, 2.2);
+        key.position.set(3, 5, 3);
+        scene.add(key);
+
+        const fill = new THREE.DirectionalLight(0xffffff, 0.35);
+        fill.position.set(-4, 1, 2);
+        scene.add(fill);
+
+        const rim = new THREE.DirectionalLight(0xffffff, 1.1);
+        rim.position.set(-1, 4, -5);
+        scene.add(rim);
+
+        const bounce = new THREE.DirectionalLight(0xfff8f0, 0.25);
+        bounce.position.set(0, -4, 2);
+        scene.add(bounce);
+
+        // --- Load GLB ---
+        let model = null;
+        const loader = new THREE.GLTFLoader();
+        loader.load('../non%20image%20assets/vest%20render.glb', function (gltf) {
+            model = gltf.scene;
+
+            const box = new THREE.Box3().setFromObject(model);
+            const center = new THREE.Vector3();
+            box.getCenter(center);
+            model.position.sub(center);
+
+            const size = new THREE.Vector3();
+            box.getSize(size);
+            const maxDim = Math.max(size.x, size.y, size.z);
+
+            scene.add(model);
+            document.getElementById('webgl-loading').classList.add('hidden');
+
+            camera.position.set(0, 0, maxDim * 1.6);
+            camera.near = maxDim * 0.001;
+            camera.far  = maxDim * 10;
+            camera.updateProjectionMatrix();
+        });
+
+        // --- Drag-to-rotate ---
+        let isDragging = false;
+        let prevX = 0, prevY = 0;
+        let rotX = 0, rotY = 0;
+        let velX = 0, velY = 0;
+        let autoRotate = true;
+
+        container.addEventListener('mousedown', e => {
+            isDragging = true; autoRotate = false;
+            prevX = e.clientX; prevY = e.clientY;
+            container.classList.add('interacted');
+        });
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            velY = (e.clientX - prevX) * 0.005;
+            velX = (e.clientY - prevY) * 0.005;
+            rotY += velY; rotX += velX;
+            prevX = e.clientX; prevY = e.clientY;
+        });
+        window.addEventListener('mouseup', () => { isDragging = false; });
+
+        let prevTX = 0, prevTY = 0;
+        container.addEventListener('touchstart', e => {
+            autoRotate = false;
+            prevTX = e.touches[0].clientX;
+            prevTY = e.touches[0].clientY;
+            container.classList.add('interacted');
+        });
+        container.addEventListener('touchmove', e => {
+            velY = (e.touches[0].clientX - prevTX) * 0.005;
+            velX = (e.touches[0].clientY - prevTY) * 0.005;
+            rotY += velY; rotX += velX;
+            prevTX = e.touches[0].clientX;
+            prevTY = e.touches[0].clientY;
+            e.preventDefault();
+        }, { passive: false });
+
+        // --- Resize ---
+        function resize() {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        }
+        new ResizeObserver(resize).observe(container);
+        resize();
+
+        // --- Render loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            if (autoRotate) {
+                rotY += 0.003;
+            } else if (!isDragging) {
+                velX *= 0.92; velY *= 0.92;
+                rotX += velX; rotY += velY;
+                if (Math.abs(velX) < 0.0001 && Math.abs(velY) < 0.0001) autoRotate = true;
+            }
+            if (model) {
+                model.rotation.x = rotX;
+                model.rotation.y = rotY;
+            }
+            renderer.render(scene, camera);
+        }
+        animate();
+    })();
+    </script>
+</body>
+</html>

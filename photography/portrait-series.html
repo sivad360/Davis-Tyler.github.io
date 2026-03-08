@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portrait Series — Davis Tyler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800;12..96,600;12..96,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .photo-grid {
+            columns: 2;
+            column-gap: 3vw;
+            margin-top: 4vw;
+        }
+
+        .photo-grid .image-wrapper {
+            break-inside: avoid;
+            aspect-ratio: unset;
+            margin-bottom: 3vw;
+        }
+
+        .photo-grid .image-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="../index.html" class="nav-logo">DT</a>
+            <a href="../index.html#photography" class="nav-back">← Back to Photography</a>
+        </nav>
+
+        <header>
+            <div class="project-meta">
+                <span>DIGITAL</span>
+                <span>24 IMAGES</span>
+            </div>
+            <h1>Portrait Series</h1>
+            <p class="project-intro">
+                [Intro — placeholder]
+            </p>
+        </header>
+
+        <main>
+
+            <section>
+                <div class="photo-grid">
+                    <!-- Add images here as they become available -->
+                    <!-- <div class="image-wrapper"><img src="../images/photography/[file].jpg" alt=""></div> -->
+                </div>
+            </section>
+
+            <section>
+                <a href="../index.html#photography" class="next-project">
+                    <div class="next-label">ALL PHOTOGRAPHY</div>
+                    <h2 class="next-title">Back to Index</h2>
+                </a>
+            </section>
+
+        </main>
+
+        <footer>
+            <div class="footer-nav">
+                <div class="footer-nav-main">
+                    <a href="../">Home</a>
+                    <a href="../#projects">Projects</a>
+                    <a href="../#trips">Trips</a>
+                    <a href="../#photography">Photography</a>
+                    <a href="../#resources">Resources</a>
+                    <a href="../archive.html">Archive</a>
+                    <a href="../about.html">About</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
