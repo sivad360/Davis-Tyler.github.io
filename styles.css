@@ -273,6 +273,32 @@ section:nth-child(7) { animation-delay: 0.9s; }
     opacity: 0.7;
 }
 
+.tools-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.tool-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tool-logo img {
+    width: 2rem;
+    height: 2rem;
+    opacity: 0.8;
+}
+
+.tool-logo span {
+    font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+    opacity: 0.6;
+    font-family: 'JetBrains Mono', monospace;
+}
+
 .detail-item li::before {
     content: '→ ';
     opacity: 0.5;
