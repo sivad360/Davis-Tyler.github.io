@@ -216,6 +216,18 @@ section:nth-child(7) { animation-delay: 0.9s; }
     grid-column: 1 / -1;
 }
 
+.image-wrapper.hero-auto {
+    aspect-ratio: unset;
+    grid-column: 1 / -1;
+}
+
+.image-wrapper.hero-auto img {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+}
+
 .image-wrapper.portrait {
     aspect-ratio: 3/4;
 }
